@@ -1,0 +1,18 @@
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '8.0'
+inhibit_all_warnings!
+
+target 'BasicService' do
+    use_frameworks!
+    pod "WebViewJavascriptBridge", :git => "https://github.com/quchaogu/WebViewJavascriptBridge.git"
+    pod 'QCGURLRouter',     '~> 0.0.2'
+    pod 'RxSwift',          '~> 4.4.0'
+    pod 'RxCocoa',          '~> 4.4.0'
+    pod 'SnapKit',          '~> 4.2.0'
+    pod 'AFNetworking',     '~> 3.2.1'
+    pod 'SDWebImage',       '~> 4.4.2'
+    pod 'BlocksKit',        '~> 2.2.5'
+    pod 'MJRefresh',        '~> 3.1.15.7'
+    pod 'MJExtension',      '~> 3.0.15.1'
+    pod 'TYAttributedLabel', '~> 2.6.2'
+end

@@ -1,0 +1,6 @@
+framework module QCGURLRouter {
+  umbrella header "QCGURLRouter-umbrella.h"
+
+  export *
+  module * { export * }
+}

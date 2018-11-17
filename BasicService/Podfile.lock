@@ -1,0 +1,85 @@
+PODS:
+  - AFNetworking (3.2.1):
+    - AFNetworking/NSURLSession (= 3.2.1)
+    - AFNetworking/Reachability (= 3.2.1)
+    - AFNetworking/Security (= 3.2.1)
+    - AFNetworking/Serialization (= 3.2.1)
+    - AFNetworking/UIKit (= 3.2.1)
+  - AFNetworking/NSURLSession (3.2.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.2.1)
+  - AFNetworking/Security (3.2.1)
+  - AFNetworking/Serialization (3.2.1)
+  - AFNetworking/UIKit (3.2.1):
+    - AFNetworking/NSURLSession
+  - BlocksKit (2.2.5):
+    - BlocksKit/All (= 2.2.5)
+  - BlocksKit/All (2.2.5):
+    - BlocksKit/Core
+    - BlocksKit/DynamicDelegate
+    - BlocksKit/MessageUI
+    - BlocksKit/UIKit
+  - BlocksKit/Core (2.2.5)
+  - BlocksKit/DynamicDelegate (2.2.5)
+  - BlocksKit/MessageUI (2.2.5):
+    - BlocksKit/Core
+    - BlocksKit/DynamicDelegate
+  - BlocksKit/UIKit (2.2.5):
+    - BlocksKit/Core
+    - BlocksKit/DynamicDelegate
+  - MJExtension (3.0.15.1)
+  - MJRefresh (3.1.15.7)
+  - QCGURLRouter (0.0.2)
+  - RxAtomic (4.4.0)
+  - RxCocoa (4.4.0):
+    - RxSwift (~> 4.0)
+  - RxSwift (4.4.0):
+    - RxAtomic (~> 4.4)
+  - SDWebImage (4.4.2):
+    - SDWebImage/Core (= 4.4.2)
+  - SDWebImage/Core (4.4.2)
+  - SnapKit (4.2.0)
+  - TYAttributedLabel (2.6.6)
+  - WebViewJavascriptBridge (6.0.2)
+
+DEPENDENCIES:
+  - AFNetworking (~> 3.2.1)
+  - BlocksKit (~> 2.2.5)
+  - MJExtension (~> 3.0.15.1)
+  - MJRefresh (~> 3.1.15.7)
+  - QCGURLRouter (~> 0.0.2)
+  - RxCocoa (~> 4.4.0)
+  - RxSwift (~> 4.4.0)
+  - SDWebImage (~> 4.4.2)
+  - SnapKit (~> 4.2.0)
+  - TYAttributedLabel (~> 2.6.2)
+  - WebViewJavascriptBridge (from `https://github.com/quchaogu/WebViewJavascriptBridge.git`)
+
+EXTERNAL SOURCES:
+  WebViewJavascriptBridge:
+    :git: https://github.com/quchaogu/WebViewJavascriptBridge.git
+
+CHECKOUT OPTIONS:
+  WebViewJavascriptBridge:
+    :commit: 9f03695f5883cf75ea546c3d1b5e7544fe7bcefa
+    :git: https://github.com/quchaogu/WebViewJavascriptBridge.git
+
+SPEC CHECKSUMS:
+  AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
+  BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
+  MJExtension: 19bc33ce2eee2d319760f5622562cf581a6ff756
+  MJRefresh: 697f8ec75ebdbe9207767bb682cf0f51b0d8a41f
+  QCGURLRouter: 448bd31c89fdc5cab682de91f81bac5ce9b13512
+  RxAtomic: eacf60db868c96bfd63320e28619fe29c179656f
+  RxCocoa: df63ebf7b9a70d6b4eeea407ed5dd4efc8979749
+  RxSwift: 5976ecd04fc2fefd648827c23de5e11157faa973
+  SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
+  SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
+  TYAttributedLabel: cb8fc910d97eb5224936d4f692a78e042af691b2
+  WebViewJavascriptBridge: 791ee0e26d1bf15efe5fb7fb9666a71a19b89d77
+
+PODFILE CHECKSUM: 8e561b52b0cea548dc4ed213c6b21a8fceef2d0c
+
+COCOAPODS: 1.4.0

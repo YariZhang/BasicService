@@ -18,12 +18,11 @@ public enum ServerType: String {
 }
 
 public class BaseError: NSObject {
-    var msg : String?
-    var error : Error?
-    var reqTask : URLSessionTask?
+    public var msg : String?
+    public var error : Error?
+    public var reqTask : URLSessionTask?
     
-    required init(msg : String?, error : Error?, reqTask : URLSessionTask?)
-    {
+    public required init(msg : String?, error : Error?, reqTask : URLSessionTask?) {
         self.msg = msg
         self.error = error
         self.reqTask = reqTask

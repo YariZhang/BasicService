@@ -32,7 +32,7 @@ public class GradientButton: BaseButton {
         }
     }
 
-    init(lColor: CGColor = HexColor("#f2233b").cgColor, rColor: CGColor = HexColor("#ff6622").cgColor, needLabel: Bool = false) {
+    public init(lColor: CGColor = HexColor("#f2233b").cgColor, rColor: CGColor = HexColor("#ff6622").cgColor, needLabel: Bool = false) {
         self.lColor = lColor
         self.rColor = rColor
         super.init(frame: .zero)
@@ -59,7 +59,7 @@ public class GradientButton: BaseButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setColor(lColor: CGColor, rColor: CGColor) {
+    public func setColor(lColor: CGColor, rColor: CGColor) {
         self.lColor = lColor
         self.rColor = rColor
         gradientLayer?.colors = [lColor, rColor]

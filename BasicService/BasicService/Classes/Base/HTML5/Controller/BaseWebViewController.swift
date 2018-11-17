@@ -14,7 +14,7 @@ let QQ_OAUTH2_URL = "http://oauth2.quchaogu.com/qq"
 
 open class BaseWebViewController: BaseViewController, DxwWebViewDelegate {
     private var _url: String = ""
-    public var url: String {
+    open var url: String {
         get {
             return _url;
         }
@@ -26,15 +26,15 @@ open class BaseWebViewController: BaseViewController, DxwWebViewDelegate {
             }
         }
     }
-    public var relativeUrl: String = "" {
+    open var relativeUrl: String = "" {
         didSet {
             if relativeUrl.hasPrefix("/") {
                 relativeUrl = (relativeUrl as NSString).substring(from: 1)
             }
         }
     }
-    var headers: Dictionary<String, String>?
-    public override var param: Dictionary<String, Any>? {
+    open var headers: Dictionary<String, String>?
+    override open var param: Dictionary<String, Any>? {
         didSet {
             if param != nil {
                 if let url = param!["abUrl"] as? String {
@@ -57,7 +57,7 @@ open class BaseWebViewController: BaseViewController, DxwWebViewDelegate {
         self.webView = nil
     }
     
-    override public func initUI() {
+    override open func initUI() {
         super.initUI()
         webView = DxwWebView(url: url)
         webView.backgroundColor = UIColor.clear
@@ -109,7 +109,7 @@ open class BaseWebViewController: BaseViewController, DxwWebViewDelegate {
         }
     }
     
-    private func dxwWebViewStart(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+    open func dxwWebViewStart(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
 //        if needLoading{
 //            let tmpToast = ToastView.showMessage("加载中...", withParentView : self.webView, withTarget: nil, andAction: nil)
 //            if tmpToast != nil
@@ -123,7 +123,7 @@ open class BaseWebViewController: BaseViewController, DxwWebViewDelegate {
 //        }
     }
     
-    private func dxwWebViewFinished(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+    open func dxwWebViewFinished(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         webView.evaluateJavaScript("document.title") { (data, error) in
             self.title = (data + "").count > 0 ? data + "" : "详情"
         }
@@ -131,29 +131,29 @@ open class BaseWebViewController: BaseViewController, DxwWebViewDelegate {
 //        _toastView  = nil
     }
     
-    private func dxwWebViewFailed(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+    open func dxwWebViewFailed(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
 //        _toastView?.dismiss()
 //        _toastView  = nil
     }
     
-    private func dxwWebViewHasDecidePolicy(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+    open func dxwWebViewHasDecidePolicy(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
     }
     
-    override public func needSendPv() -> Bool {
+    override open func needSendPv() -> Bool {
         if url.contains(".pdf") && url.contains("#hy123") {
             return true
         }
         return false
     }
     
-    override public func getTo() -> String {
+    override open func getTo() -> String {
         if url.contains(".pdf") && url.contains("#hy123") {
             return self.url
         }
         return super.getTo()
     }
     
-    public func reloadData() {
+    open func reloadData() {
         self.loadUrlStr(self.url)
     }
     

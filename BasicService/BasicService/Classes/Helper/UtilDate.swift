@@ -8,9 +8,9 @@
 
 import UIKit
 
-class UtilDate: NSObject {
+public class UtilDate: NSObject {
     //格式化时间 输入时间戳，以自定义的时间格式输出
-    class func formatTime(_ express : String = "yyyy-MM-dd HH:mm",time_interval : Int = 0) -> String {
+    public class func formatTime(_ express : String = "yyyy-MM-dd HH:mm",time_interval : Int = 0) -> String {
         var date : Date?
         
         if time_interval == 0 {
@@ -25,13 +25,13 @@ class UtilDate: NSObject {
         return timeStr
     }
     //获取当前时间戳
-    class func getTimeInterval() ->Int {
+    public class func getTimeInterval() ->Int {
         let d = Date()
         let t = d.timeIntervalSince1970
         return Int(t)
     }
     
-    class func getTimeIntervalByDateString(_ express : String = "yyyyMMdd" , dateStr : String) -> Int {
+    public class func getTimeIntervalByDateString(_ express : String = "yyyyMMdd" , dateStr : String) -> Int {
         let format : DateFormatter = DateFormatter()
         format.dateFormat = express
         let date = format.date(from: dateStr)
@@ -40,7 +40,7 @@ class UtilDate: NSObject {
     }
     
     //将输入的年月日转化为时间戳再转化为需要的格式  如 "yyyyMMdd"  20150606  "MM-dd" -> 06-06
-    class func convertFormatByDate(_ express : String = "yyyyMMdd" , date_time : String , toFormat : String = "MM-dd") -> String {
+    public class func convertFormatByDate(_ express : String = "yyyyMMdd" , date_time : String , toFormat : String = "MM-dd") -> String {
         
         let format : DateFormatter = DateFormatter()
         format.dateFormat = express

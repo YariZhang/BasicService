@@ -8,25 +8,25 @@
 
 import UIKit
 
-class GradientButton: BaseButton {
+public class GradientButton: BaseButton {
     
-    var labelFont: UIFont? {
+    public var labelFont: UIFont? {
         didSet {
             label?.font = labelFont
         }
     }
-    var labelColor: UIColor? {
+    public var labelColor: UIColor? {
         didSet {
             label?.textColor = labelColor
         }
     }
-    var text: String? {
+    public var text: String? {
         didSet {
             label?.text = text
         }
     }
     
-    var needGradient: Bool = true {
+    public var needGradient: Bool = true {
         didSet {
             gradientLayer?.isHidden = !needGradient
         }
@@ -65,7 +65,7 @@ class GradientButton: BaseButton {
         gradientLayer?.colors = [lColor, rColor]
     }
     
-    override func draw(_ rect: CGRect) {
+    override public func draw(_ rect: CGRect) {
         super.draw(rect)
         gradientLayer?.frame = rect
     }

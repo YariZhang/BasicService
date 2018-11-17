@@ -11,15 +11,13 @@ import AFNetworking
 
 public let glApiVersion: String = "1.0"
 
-public enum ServerType : String
-{
+public enum ServerType: String {
     case base = "http://api.quchaogu.com/"
     case uc = "http://ucapi.quchaogu.com/"
     case analyse = "http://analytics.quchaogu.com/"
 }
 
-public class BaseError : NSObject
-{
+public class BaseError: NSObject {
     var msg : String?
     var error : Error?
     var reqTask : URLSessionTask?
@@ -32,45 +30,46 @@ public class BaseError : NSObject
     }
 }
 
+public enum RequestOutputType: Int {
+    case json = 1
+    case xml
+    case bin
+}
+
 open class BaseRequest: NSObject {
-    public enum RequestOutputType : Int {
-        case json = 1
-        case xml
-        case bin
-    }
     
     public let requestManager : BaseHttpSessionManager = BaseHttpSessionManager.sharedOperationManager
-    public var completionBlock: ((BaseModel) -> Void)?//请求完成的回调
-    public var failureBlock: ((BaseError) -> Void)?//请求失败的回调
-    public var isPostMethod: Bool = false
-    public var timeout: TimeInterval = 20.0
+    open var completionBlock: ((BaseModel) -> Void)?//请求完成的回调
+    open var failureBlock: ((BaseError) -> Void)?//请求失败的回调
+    open var isPostMethod: Bool = false
+    open var timeout: TimeInterval = 20.0
     private var outputType: RequestOutputType = .json
     private var requestParamDic: Dictionary<String, Any>? //请求所有参数
     private var requestCommonDic: Dictionary<String, String>?//请求通用参数
     private var postFileParaDic: Dictionary<String, Any>?    //需要post上传的文件字典
     private var httpHeader: Dictionary<String , String>? = nil   //http头
 
-    public func getServerType() -> ServerType {
+    open func getServerType() -> ServerType {
         return ServerType.base
     }
     
-    public func getRelativeUrl() -> String? {
+    open func getRelativeUrl() -> String? {
         return nil
     }
     
-    public func getAbsoluteUrl() -> String? {
+    open func getAbsoluteUrl() -> String? {
         return nil
     }
     
-    public func getRequestVersion() -> String {
+    open func getRequestVersion() -> String {
         return glApiVersion
     }
     
-    public func needRequestToast() -> Bool {
+    open func needRequestToast() -> Bool {
         return true
     }
     
-    public func decodeJsonRequestData(responseDic : Dictionary<String,Any>?) -> BaseModel? {
+    open func decodeJsonRequestData(responseDic : Dictionary<String,Any>?) -> BaseModel? {
         guard responseDic != nil else {
             return nil
         }
@@ -78,11 +77,11 @@ open class BaseRequest: NSObject {
         return baseData
     }
     
-    public func decodeBinRequestData(_ data : Any?) -> BaseModel? {
+    open func decodeBinRequestData(_ data : Any?) -> BaseModel? {
         preconditionFailure("The method 'decodeBinRequestData' must be overridden")
     }
     
-    public func decodeXmlRequestData(_ data : Any?) -> BaseModel? {
+    open func decodeXmlRequestData(_ data : Any?) -> BaseModel? {
         preconditionFailure("The method 'decodeXmlRequestData' must be overridden")
     }
     

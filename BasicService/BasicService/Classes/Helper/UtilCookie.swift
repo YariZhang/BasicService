@@ -8,10 +8,11 @@
 
 import UIKit
 
-class UtilCookie: NSObject {
+public class UtilCookie: NSObject {
 
     //加载Cookie
-    class func loadCookie() {
+    public static var cookieName: String = "web_qtstr"
+    public class func loadCookie() {
         let userData = UserDefaults()
         let cookiesData = userData.object(forKey: "cookies") as? Data
         if cookiesData != nil {
@@ -30,19 +31,19 @@ class UtilCookie: NSObject {
         }
     }
     //删除Cookie
-    class func logout() {
+    public class func logout() {
         let cookies : Array? = HTTPCookieStorage.shared.cookies
         for c in cookies! {
             let cookie = c
-            let cookieName = cookie.name as String
-            if cookieName == "web_qtstr" {
+            let cookieN = cookie.name as String
+            if cookieN == cookieName {
                 HTTPCookieStorage.shared.deleteCookie(cookie)
             }
         }
         saveCookie()
     }
     //保存Cookie
-    class func saveCookie() {
+    public class func saveCookie() {
         guard let cookies = HTTPCookieStorage.shared.cookies else {
             return
         }
@@ -63,7 +64,7 @@ class UtilCookie: NSObject {
         }
     }
     //获取Cookie
-    class func getCookieByKey(_ key:String) -> String {
+    public class func getCookieByKey(_ key:String) -> String {
         let cookies : NSArray? = HTTPCookieStorage.shared.cookies as NSArray?
         if cookies == nil {
             return ""

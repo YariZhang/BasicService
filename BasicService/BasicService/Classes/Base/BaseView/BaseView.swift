@@ -2,7 +2,7 @@
 //  BaseView.swift
 //  GaodiLicai
 //
-//  Created by focus on 15/12/1.
+//  Created by zhangyr on 18/11/17.
 //  Copyright © 2015年 quchaogu. All rights reserved.
 //
 
@@ -20,19 +20,19 @@ open class BaseView: UIView {
         }
     }
     
-    public func initUI() {
+    open func initUI() {
         self.backgroundColor = UIColor.clear
     }
     
-    public func initBaseData() {
+    open func initBaseData() {
     
     }
     
-    public func loadBaseData() {
+    open func loadBaseData() {
         
     }
     
-    public func needLifeCycle() -> Bool {
+    open func needLifeCycle() -> Bool {
         return true
     }
     

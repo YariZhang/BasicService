@@ -53,11 +53,11 @@ open class DxwWebView: BaseView, WKUIDelegate, WKNavigationDelegate {
         NotificationCenter.default.removeObserver(self)
     }
     
-    override public func initBaseData() {
+    override open func initBaseData() {
         super.initBaseData()
     }
     
-    override public func needLifeCycle() -> Bool {
+    override open func needLifeCycle() -> Bool {
         return false
     }
     
@@ -67,7 +67,7 @@ open class DxwWebView: BaseView, WKUIDelegate, WKNavigationDelegate {
         webView.backgroundColor = HexColor(COLOR_COMMON_WHITE)
     }
     
-    override public func initUI() {
+    override open func initUI() {
         super.initUI()
         self.backgroundColor = HexColor(COLOR_COMMON_WHITE)
         let scaleConfig = WKWebViewConfiguration()
@@ -110,28 +110,28 @@ open class DxwWebView: BaseView, WKUIDelegate, WKNavigationDelegate {
         bridge.callHandler(key, data: param)
     }
     
-    private func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+    open func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         hasLoaded = false
         self.delegate?.dxwWebViewStart?(webView, didStartProvisionalNavigation: navigation)
     }
     
-    private func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+    open func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         hasLoaded = true
         webView.evaluateJavaScript("document.documentElement.style.webkitUserSelect='none';", completionHandler: nil)
         webView.evaluateJavaScript("document.documentElement.style.webkitTouchCallout='none';", completionHandler: nil)
         self.delegate?.dxwWebViewFinished?(webView, didFinish: navigation)
     }
     
-    private func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+    open func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         self.delegate?.dxwWebViewFailed?(webView, didFail: navigation, withError: error)
     }
     
-    private func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+    open func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         H5Helpler.sharedInstance.handleH5Intercept(jsBase: jsBase, webView: webView, decidePolicyFor: navigationAction, decisionHandler: decisionHandler)
         self.delegate?.dxwWebViewHasDecidePolicy?(webView, decidePolicyFor: navigationAction, decisionHandler: decisionHandler)
     }
     
-    private func webView(_ webView: WKWebView, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Swift.Void) {
+    open func webView(_ webView: WKWebView, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Swift.Void) {
         if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
             let card = URLCredential(trust: challenge.protectionSpace.serverTrust!)
             
@@ -154,6 +154,6 @@ open class DxwWebView: BaseView, WKUIDelegate, WKNavigationDelegate {
     }
     
     private var hasLoaded: Bool = false
-    var bridge: WebViewJavascriptBridge!
-    var webView: DxwWKWebView!
+    open var bridge: WebViewJavascriptBridge!
+    open var webView: DxwWKWebView!
 }

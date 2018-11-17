@@ -51,7 +51,7 @@ open class BaseViewModel: NSObject {
         self.delegate = delegate
     }
     
-    public func updateReqParam(_ param: Dictionary<String, Any>) {
+    open func updateReqParam(_ param: Dictionary<String, Any>) {
         //TODO: 更新参数后逻辑
     }
     

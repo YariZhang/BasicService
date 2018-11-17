@@ -23,17 +23,16 @@ open class BaseViewController: UIViewController, UIGestureRecognizerDelegate, Vi
     }
 
     public static var isTabChanged: Bool = false
-    public var isTabVc: Bool = false
-    public var param : Dictionary<String, Any>? {
+    open var isTabVc: Bool = false
+    open var param : Dictionary<String, Any>? {
         didSet {
             referDic = param
             viewModel.reqParam = param
         }
     }
     public var baseBgView  : UIView!
-    
     public var disposeBag = DisposeBag()
-    public var backgroundColor: UIColor? {
+    open var backgroundColor: UIColor? {
         set {
             self.view.backgroundColor = backgroundColor
             baseForeBackView?.backgroundColor = backgroundColor
@@ -46,7 +45,7 @@ open class BaseViewController: UIViewController, UIGestureRecognizerDelegate, Vi
     private var baseForeBackView : UIView!
     private var statusBarHidden : Bool = false
     private var referDic: Dictionary<String, Any>?
-    public var viewModel: BaseViewModel!
+    open var viewModel: BaseViewModel!
     
     override open func viewDidLoad() {
         super.viewDidLoad()
@@ -96,16 +95,15 @@ open class BaseViewController: UIViewController, UIGestureRecognizerDelegate, Vi
         }
     }
     
-    public func getViewModelType() -> BaseViewModel.Type {
+    open func getViewModelType() -> BaseViewModel.Type {
         return BaseViewModel.self
     }
     /**
      初始化界面
      - returns: 无
      */
-    public func initUI() {
+    open func initUI() {
         self.edgesForExtendedLayout = UIRectEdge()
-        
         baseBgView = UIView()
         self.view.addSubview(baseBgView)
         self.view.clipsToBounds = false
@@ -142,8 +140,7 @@ open class BaseViewController: UIViewController, UIGestureRecognizerDelegate, Vi
      请求数据
      - returns: 无
      */
-    public func refreshData() {
-        
+    open func refreshData() {
     }
     
     /**
@@ -151,8 +148,7 @@ open class BaseViewController: UIViewController, UIGestureRecognizerDelegate, Vi
     
      - returns: 是否可以
      */
-    public func canSlideToLast() -> Bool
-    {
+    open func canSlideToLast() -> Bool {
         return true
     }
     
@@ -161,7 +157,7 @@ open class BaseViewController: UIViewController, UIGestureRecognizerDelegate, Vi
      
      - returns: 是否需要
      */
-    public func needSetBackIcon()  -> Bool {
+    open func needSetBackIcon()  -> Bool {
         return true
     }
     
@@ -170,7 +166,7 @@ open class BaseViewController: UIViewController, UIGestureRecognizerDelegate, Vi
      
      - returns: 无
      */
-    public func setBackIcon() {
+    open func setBackIcon() {
         let btn = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 18))
         btn.setImage(UIImage(named: "back"), for: UIControl.State())
         btn.imageEdgeInsets = UIEdgeInsets(top: 3, left: -8, bottom: 0, right: 0)
@@ -178,11 +174,11 @@ open class BaseViewController: UIViewController, UIGestureRecognizerDelegate, Vi
         self.navigationItem.leftBarButtonItem  = UIBarButtonItem(customView: btn)
     }
     
-    public func needSendPv() -> Bool {
+    open func needSendPv() -> Bool {
         return true
     }
     
-    public func getFrom() -> String {
+    open func getFrom() -> String {
         var from: String = "-"
         if let vc = UIApplication.appTopViewController() as? BaseViewController {
             from = vc.getTo()
@@ -195,7 +191,7 @@ open class BaseViewController: UIViewController, UIGestureRecognizerDelegate, Vi
         return from
     }
     
-    public func getTo() -> String {
+    open func getTo() -> String {
         var para : String = ""
         if self.referDic != nil && !self.referDic!.isEmpty {
             para = "?"
@@ -207,7 +203,7 @@ open class BaseViewController: UIViewController, UIGestureRecognizerDelegate, Vi
         return getVcId() + para
     }
     
-    private func getVcId() -> String {
+    open func getVcId() -> String {
         return "/"
     }
     
@@ -219,7 +215,7 @@ open class BaseViewController: UIViewController, UIGestureRecognizerDelegate, Vi
         }
     }
     
-    private func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    open func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         if gestureRecognizer == self.navigationController!.interactivePopGestureRecognizer {
             return self.navigationController!.viewControllers.count > 1
         }

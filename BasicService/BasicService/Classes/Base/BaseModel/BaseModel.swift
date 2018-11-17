@@ -9,13 +9,13 @@
 import UIKit
 import MJExtension
 
-public class BaseModel: NSObject {
+open class BaseModel: NSObject {
     
     @objc public var resultCode: NSNumber?
     @objc public var errorMsg: String?
     @objc public var resultData: AnyObject?
     
-    override public static func mj_replacedKeyFromPropertyName() -> [AnyHashable : Any]! {
+    override open class func mj_replacedKeyFromPropertyName() -> [AnyHashable : Any]! {
         let subDic = ["resultCode" : "code", "errorMsg" : "msg", "resultData" : "data"]
         return subDic
     }

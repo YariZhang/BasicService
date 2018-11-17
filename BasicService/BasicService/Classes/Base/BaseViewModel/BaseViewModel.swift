@@ -13,7 +13,7 @@ import UIKit
     @objc optional func updateUI()
 }
 
-public class BaseViewModel: NSObject {
+open class BaseViewModel: NSObject {
     
     public weak var view: UIView? {
         if let control = delegate as? UIViewController {
@@ -34,7 +34,7 @@ public class BaseViewModel: NSObject {
     }
     
     ///页面请求参数
-    public var reqParam: Dictionary<String, Any>? {
+    open var reqParam: Dictionary<String, Any>? {
         didSet {
             if reqParam != nil {
                 updateReqParam(reqParam!)
@@ -46,7 +46,7 @@ public class BaseViewModel: NSObject {
     private weak var delegate: ViewModelProtocol?
     private var task: URLSessionDataTask?
     
-    required init(delegate: ViewModelProtocol?) {
+    required public init(delegate: ViewModelProtocol?) {
         super.init()
         self.delegate = delegate
     }

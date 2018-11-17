@@ -32,7 +32,7 @@ public class BaseError : NSObject
     }
 }
 
-public class BaseRequest: NSObject {
+open class BaseRequest: NSObject {
     public enum RequestOutputType : Int {
         case json = 1
         case xml

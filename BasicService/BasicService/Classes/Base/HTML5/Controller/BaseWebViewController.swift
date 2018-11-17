@@ -12,7 +12,7 @@ import SnapKit
 
 let QQ_OAUTH2_URL = "http://oauth2.quchaogu.com/qq"
 
-public class BaseWebViewController: BaseViewController, DxwWebViewDelegate {
+open class BaseWebViewController: BaseViewController, DxwWebViewDelegate {
     private var _url: String = ""
     public var url: String {
         get {
@@ -80,7 +80,7 @@ public class BaseWebViewController: BaseViewController, DxwWebViewDelegate {
         }
     }
     
-    override public func viewDidAppear(_ animated: Bool) {
+    override open func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if isFirstLoad {
             var url1 = url
@@ -96,7 +96,7 @@ public class BaseWebViewController: BaseViewController, DxwWebViewDelegate {
         self.viewDidAppearCallBack?()
     }
     
-    override public func viewWillDisappear(_ animated: Bool) {
+    override open func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         webView.webView.stopLoading()
     }

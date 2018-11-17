@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BehaviorPRequest : BaseRequest
+final class BehaviorPRequest : BaseRequest
 {
     required init(paraDic : Dictionary<String, Any>) {
         super.init()
@@ -30,7 +30,7 @@ class BehaviorPRequest : BaseRequest
     
 }
 
-class BehaviorERequest : BaseRequest
+final class BehaviorERequest : BaseRequest
 {
     required init(paraDic : Dictionary<String, String>) {
         super.init()

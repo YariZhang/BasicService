@@ -21,7 +21,7 @@ import WebViewJavascriptBridge
 public class DxwWKWebView : WKWebView {
 }
 
-public class DxwWebView: BaseView, WKUIDelegate, WKNavigationDelegate {
+open class DxwWebView: BaseView, WKUIDelegate, WKNavigationDelegate {
     public weak var delegate: DxwWebViewDelegate?
     public var code: String = ""
     public var jsBase: WebViewJavascriptBridgeBase!
@@ -42,7 +42,7 @@ public class DxwWebView: BaseView, WKUIDelegate, WKNavigationDelegate {
         }
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -61,7 +61,7 @@ public class DxwWebView: BaseView, WKUIDelegate, WKNavigationDelegate {
         return false
     }
     
-    override public func layoutSubviews() {
+    override open func layoutSubviews() {
         super.layoutSubviews()
         webView.isOpaque = false
         webView.backgroundColor = HexColor(COLOR_COMMON_WHITE)

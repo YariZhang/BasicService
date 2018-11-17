@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import QCGURLRouter
 
-public class BaseViewController: UIViewController, UIGestureRecognizerDelegate, ViewModelProtocol, QCGURLReceiver {
+open class BaseViewController: UIViewController, UIGestureRecognizerDelegate, ViewModelProtocol, QCGURLReceiver {
     
     public required init(parameters: Dictionary<String, Any>? = nil) {
         super.init(nibName: nil, bundle: nil)
@@ -18,7 +18,7 @@ public class BaseViewController: UIViewController, UIGestureRecognizerDelegate, 
         viewModel = getViewModelType().init(delegate: self)
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
@@ -48,12 +48,12 @@ public class BaseViewController: UIViewController, UIGestureRecognizerDelegate, 
     private var referDic: Dictionary<String, Any>?
     public var viewModel: BaseViewModel!
     
-    override public func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
         initUI()
     }
     
-    override public func viewDidAppear(_ animated: Bool) {
+    override open func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if canSlideToLast() {
             if self.navigationController != nil && self.navigationController!.responds(to: #selector(getter: UINavigationController.interactivePopGestureRecognizer)) {
@@ -79,7 +79,7 @@ public class BaseViewController: UIViewController, UIGestureRecognizerDelegate, 
         isFirstLoad = false
     }
     
-    override public func viewWillDisappear(_ animated: Bool) {
+    override open func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         if self.navigationController != nil && self.navigationController!.responds(to: #selector(getter: UINavigationController.interactivePopGestureRecognizer)) {
             self.navigationController?.interactivePopGestureRecognizer?.delegate    = nil
@@ -227,7 +227,7 @@ public class BaseViewController: UIViewController, UIGestureRecognizerDelegate, 
     }
     
     
-    override public var prefersStatusBarHidden : Bool {
+    override open var prefersStatusBarHidden : Bool {
         return statusBarHidden
     }
     

@@ -9,9 +9,9 @@
 import UIKit
 import SnapKit
 
-public class BaseNavigationController: UINavigationController, UINavigationControllerDelegate {
+open class BaseNavigationController: UINavigationController, UINavigationControllerDelegate {
 
-    override public func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
         self.delegate = self
         self.view.backgroundColor = HexColor("#fff")
@@ -51,7 +51,7 @@ public class BaseNavigationController: UINavigationController, UINavigationContr
         }
     }
     
-    override public var preferredStatusBarStyle : UIStatusBarStyle {
+    override open var preferredStatusBarStyle : UIStatusBarStyle {
         return .lightContent
     }
     

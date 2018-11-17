@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		4EBB601D990AC173A62DE10E /* Pods_BasicService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 503BC4075E84D8E85C4ED47D /* Pods_BasicService.framework */; };
 		6B8E4AF6219E5C9100947536 /* BasicService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B8E4AEC219E5C9100947536 /* BasicService.framework */; };
-		6B8E4AFD219E5C9100947536 /* BasicService.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B8E4AEF219E5C9100947536 /* BasicService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6B8E4B0D219E5CD400947536 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8E4B0C219E5CD400947536 /* AppDelegate.swift */; };
 		6B8E4B0F219E5CD400947536 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8E4B0E219E5CD400947536 /* ViewController.swift */; };
 		6B8E4B12219E5CD400947536 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B8E4B10219E5CD400947536 /* Main.storyboard */; };
@@ -77,7 +76,6 @@
 		503BC4075E84D8E85C4ED47D /* Pods_BasicService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BasicService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6142F4B8C6839EAFE5A3F1EE /* Pods-BasicService.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BasicService.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BasicService/Pods-BasicService.debug.xcconfig"; sourceTree = "<group>"; };
 		6B8E4AEC219E5C9100947536 /* BasicService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BasicService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6B8E4AEF219E5C9100947536 /* BasicService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BasicService.h; sourceTree = "<group>"; };
 		6B8E4AF0219E5C9100947536 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6B8E4AF5219E5C9100947536 /* BasicServiceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BasicServiceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B8E4B0A219E5CD400947536 /* BasicServiceDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BasicServiceDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -336,7 +334,6 @@
 		6B8E4B70219E646000947536 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				6B8E4AEF219E5C9100947536 /* BasicService.h */,
 				6B8E4B43219E60E900947536 /* Base */,
 				6B8E4B3F219E60E900947536 /* Behavior */,
 				6B8E4B58219E60E900947536 /* Define */,
@@ -395,7 +392,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6B8E4AFD219E5C9100947536 /* BasicService.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -875,6 +871,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = BasicService/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -903,6 +900,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = BasicService/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -961,6 +959,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QC3MWXF44K;
 				INFOPLIST_FILE = BasicServiceDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -979,6 +978,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QC3MWXF44K;
 				INFOPLIST_FILE = BasicServiceDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

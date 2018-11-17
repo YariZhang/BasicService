@@ -6,6 +6,12 @@
 //  Copyright © 2018 zhangyr. All rights reserved.
 //
 
+import UIKit
+
+//十六进制颜色
+public func HexColor(_ hex: String) -> UIColor {
+    return UtilTools.colorWithHexString(hex)
+}
 //-----------------------色值颜色--------------------------
 
 public let COLOR_COMMON_WHITE                  = "#ffffff"

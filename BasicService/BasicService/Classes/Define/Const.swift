@@ -48,11 +48,6 @@ public func +(left : Any?, right : String) -> String {
     return left == nil ? "" : "\(left!)" + right
 }
 
-//十六进制颜色
-public func HexColor(_ hex: String) -> UIColor {
-    return UtilTools.colorWithHexString(hex)
-}
-
 //log打印
 public func logPrint<T>(_ message: T,
                  file: String = #file,

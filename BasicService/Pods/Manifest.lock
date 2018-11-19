@@ -41,8 +41,9 @@ PODS:
     - SDWebImage/Core (= 4.4.2)
   - SDWebImage/Core (4.4.2)
   - SnapKit (4.2.0)
+  - Toast (4.0.0)
   - TYAttributedLabel (2.6.6)
-  - WebViewJavascriptBridge (6.0.2)
+  - WebViewJavascriptBridge (6.0.3)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.2.1)
@@ -54,17 +55,9 @@ DEPENDENCIES:
   - RxSwift (~> 4.4.0)
   - SDWebImage (~> 4.4.2)
   - SnapKit (~> 4.2.0)
+  - Toast (~> 4.0.0)
   - TYAttributedLabel (~> 2.6.2)
-  - WebViewJavascriptBridge (from `https://github.com/quchaogu/WebViewJavascriptBridge.git`)
-
-EXTERNAL SOURCES:
-  WebViewJavascriptBridge:
-    :git: https://github.com/quchaogu/WebViewJavascriptBridge.git
-
-CHECKOUT OPTIONS:
-  WebViewJavascriptBridge:
-    :commit: 9f03695f5883cf75ea546c3d1b5e7544fe7bcefa
-    :git: https://github.com/quchaogu/WebViewJavascriptBridge.git
+  - WebViewJavascriptBridge (~> 6.0.3)
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
@@ -77,9 +70,10 @@ SPEC CHECKSUMS:
   RxSwift: 5976ecd04fc2fefd648827c23de5e11157faa973
   SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
+  Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
   TYAttributedLabel: cb8fc910d97eb5224936d4f692a78e042af691b2
-  WebViewJavascriptBridge: 791ee0e26d1bf15efe5fb7fb9666a71a19b89d77
+  WebViewJavascriptBridge: 7f5bc4d3581e672e8f32bd0f812d54bc69bb8e29
 
-PODFILE CHECKSUM: 8e561b52b0cea548dc4ed213c6b21a8fceef2d0c
+PODFILE CHECKSUM: 7374264a6e49ee180bc3b8c5be7249021ae132f7
 
 COCOAPODS: 1.4.0

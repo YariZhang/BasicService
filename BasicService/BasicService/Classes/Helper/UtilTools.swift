@@ -58,43 +58,6 @@ public class UtilTools {
         return UIColor(red: red, green: green, blue: blue, alpha: alpha)
     }
     
-    //友好提示不合法操作 view为所要提醒显示试图 msg为提示内容,complete拖尾闭包可选,显示完信息之后做的事
-    public class func showMessage(view: UIView!, msg: String!, offset: CGFloat = TOP_AREA_HEIGHT, time: Double = 0.5, complete: @escaping () -> Void = {}) {
-        guard view != nil && msg != nil else {
-            return
-        }
-        let during  = time
-        let rect = msg.sizeWith(attributes: [NSAttributedString.Key.font : UIFont.boldFontOfSize(18)],
-                                size: CGSize(width: view.bounds.width - 100, height: 999))
-        let alert = UILabel()
-        alert.numberOfLines = 0
-        alert.backgroundColor = HexColor("#dfdfdf")
-        alert.font = UIFont.boldFontOfSize(18)
-        alert.textColor = HexColor("#424242")
-        alert.text = msg
-        alert.textAlignment = NSTextAlignment.center
-        alert.layer.cornerRadius = 5
-        alert.layer.masksToBounds = true
-        alert.alpha = 0
-        view.addSubview(alert)
-        alert.snp.makeConstraints { (maker) in
-            maker.centerX.equalTo(view)
-            maker.centerY.equalTo(view).offset(-offset)
-            maker.width.equalTo(rect.width + 20)
-            maker.height.equalTo(rect.height + 20)
-        }
-        UIView.animate(withDuration: 0.5, animations: { () -> Void in
-            alert.alpha = 0.8
-        }, completion: { (Bool) -> Void in
-            UIView.animateKeyframes(withDuration: 0.5, delay: during, options: UIView.KeyframeAnimationOptions(), animations: { () -> Void in
-                alert.alpha = 0
-            }, completion: { (Bool) -> Void in
-                alert.removeFromSuperview()
-                complete()
-            })
-        })
-    }
-    
     public class func getDeviceModel() -> String {
         let name = UIDevice.current.modelName
         return name

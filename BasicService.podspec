@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "BasicService"
-  s.version      = "0.1.4"
+  s.version      = "0.1.5"
   s.summary      = "base service for a project"
 
   # This description is used to generate tags and improve search results.
@@ -79,7 +79,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/YariZhang/BasicService.git", :tag => "0.1.4" }
+  s.source       = { :git => "https://github.com/YariZhang/BasicService.git", :tag => "0.1.5" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -143,4 +143,5 @@ Pod::Spec.new do |s|
   s.dependency 'MJRefresh',                '~> 3.1.15.7'
   s.dependency 'MJExtension',              '~> 3.0.15.1'
   s.dependency 'TYAttributedLabel',        '~> 2.6.2'
+  s.dependency 'Toast',                    '~> 4.0.0'
 end

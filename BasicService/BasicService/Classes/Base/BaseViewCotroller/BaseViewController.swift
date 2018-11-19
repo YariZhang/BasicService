@@ -9,9 +9,9 @@
 import UIKit
 import RxSwift
 import QCGURLRouter
+import Toast
 
 open class BaseViewController: UIViewController, UIGestureRecognizerDelegate, ViewModelProtocol, QCGURLReceiver {
-    
     public required init(parameters: Dictionary<String, Any>? = nil) {
         super.init(nibName: nil, bundle: nil)
         param = parameters
@@ -19,7 +19,7 @@ open class BaseViewController: UIViewController, UIGestureRecognizerDelegate, Vi
     }
     
     public required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
     }
 
     public static var isTabChanged: Bool = false
@@ -32,20 +32,30 @@ open class BaseViewController: UIViewController, UIGestureRecognizerDelegate, Vi
     }
     public var baseBgView  : UIView!
     public var disposeBag = DisposeBag()
+    open var naviBarBackgroundColor: UIColor? {
+        set {
+            baseBgView.backgroundColor = newValue
+        }
+        get {
+            return baseBgView?.backgroundColor
+        }
+    }
     open var backgroundColor: UIColor? {
         set {
-            self.view.backgroundColor = backgroundColor
-            baseForeBackView?.backgroundColor = backgroundColor
+            self.view.backgroundColor = newValue
+            baseForeBackView?.backgroundColor = newValue
         }
         get {
             return self.view.backgroundColor
         }
     }
+    open var viewModel: BaseViewModel!
     public var isFirstLoad: Bool = true
     private var baseForeBackView : UIView!
     private var statusBarHidden : Bool = false
     private var referDic: Dictionary<String, Any>?
-    open var viewModel: BaseViewModel!
+    private static var naviBarBgColor: UIColor? = HexColor("#fff")
+    private static var contentBgColor: UIColor? = HexColor("#eeecf1")
     
     override open func viewDidLoad() {
         super.viewDidLoad()
@@ -75,7 +85,6 @@ open class BaseViewController: UIViewController, UIGestureRecognizerDelegate, Vi
         if needSendPv() {
             sendPStatistics()
         }
-        isFirstLoad = false
     }
     
     override open func viewWillDisappear(_ animated: Bool) {
@@ -83,6 +92,11 @@ open class BaseViewController: UIViewController, UIGestureRecognizerDelegate, Vi
         if self.navigationController != nil && self.navigationController!.responds(to: #selector(getter: UINavigationController.interactivePopGestureRecognizer)) {
             self.navigationController?.interactivePopGestureRecognizer?.delegate    = nil
         }
+    }
+    
+    open override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        isFirstLoad = false
     }
     
     public func sendPStatistics() {
@@ -103,11 +117,18 @@ open class BaseViewController: UIViewController, UIGestureRecognizerDelegate, Vi
      - returns: 无
      */
     open func initUI() {
-        self.edgesForExtendedLayout = UIRectEdge()
-        baseBgView = UIView()
-        self.view.addSubview(baseBgView)
         self.view.clipsToBounds = false
-        baseBgView.backgroundColor  = HexColor("#fff")
+        self.edgesForExtendedLayout = UIRectEdge()
+        
+        baseBgView = UIView()
+        baseBgView.backgroundColor = BaseViewController.naviBarBgColor
+        self.view.addSubview(baseBgView)
+        
+        baseForeBackView = UIView()
+        baseForeBackView?.backgroundColor = BaseViewController.contentBgColor
+        baseBgView.addSubview(baseForeBackView!)
+        self.view.sendSubviewToBack(baseBgView)
+        
         baseBgView.snp.makeConstraints({ (maker) -> Void in
             maker.top.equalTo(self.view).offset(-TOP_AREA_HEIGHT)
             maker.bottom.equalTo(self.view)
@@ -115,17 +136,12 @@ open class BaseViewController: UIViewController, UIGestureRecognizerDelegate, Vi
             maker.right.equalTo(self.view)
         })
         
-        baseForeBackView = UIView()
-        baseForeBackView?.backgroundColor  = HexColor("#eeecf1")
-        baseBgView.addSubview(baseForeBackView!)
         baseForeBackView?.snp.makeConstraints({ (maker) in
             maker.left.equalTo(baseBgView)
             maker.right.equalTo(baseBgView)
             maker.bottom.equalTo(baseBgView)
-            maker.top.equalTo(baseBgView).offset(TOP_AREA_HEIGHT)
+            maker.top.equalToSuperview().offset(TOP_AREA_HEIGHT)
         })
-        
-        self.view.sendSubviewToBack(baseBgView)
         
         if self.needSetBackIcon() {
             self.setBackIcon()
@@ -239,18 +255,12 @@ open class BaseViewController: UIViewController, UIGestureRecognizerDelegate, Vi
     }
 }
 
-public extension BaseViewController {
-    public func setTopBar(withAlpha alpha: CGFloat, animated: Bool, duration: TimeInterval, complition: ((Bool) -> Void)?) {
-        guard let tv = (self.navigationController as? BaseNavigationController)?.barBackView else{
-            return
-        }
-        if animated {
-            UIView.animate(withDuration: duration, delay: 0, options: UIView.AnimationOptions.curveEaseInOut, animations: {
-                tv.alpha = alpha
-            }, completion: complition)
-        }else{
-            tv.alpha = alpha
-            complition?(false)
-        }
+extension BaseViewController {
+    public class func setSharedNaviBarBackgroundColor(_ color: UIColor?) {
+        naviBarBgColor = color
+    }
+    
+    public class func setSharedContentBackgroundColor(_ color: UIColor?) {
+        contentBgColor = color
     }
 }

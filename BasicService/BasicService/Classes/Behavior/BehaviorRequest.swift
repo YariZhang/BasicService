@@ -26,8 +26,7 @@ final class BehaviorPRequest : BaseRequest
     override func needRequestToast() -> Bool {
         return false
     }
-    
-    
+
 }
 
 final class BehaviorERequest : BaseRequest

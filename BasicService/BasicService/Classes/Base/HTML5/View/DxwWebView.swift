@@ -49,6 +49,8 @@ open class DxwWebView: BaseView, WKUIDelegate, WKNavigationDelegate {
     deinit {
         webView.configuration.userContentController.removeAllUserScripts()
         webView.removeFromSuperview()
+        webView.uiDelegate = nil
+        webView.navigationDelegate = nil
         webView = nil
         NotificationCenter.default.removeObserver(self)
     }
@@ -83,12 +85,12 @@ open class DxwWebView: BaseView, WKUIDelegate, WKNavigationDelegate {
         webView = DxwWKWebView(frame: CGRect.zero, configuration: scaleConfig)
         webView.isOpaque = false
         webView.backgroundColor = HexColor(COLOR_COMMON_WHITE)
+        webView.uiDelegate = self
+        webView.navigationDelegate = self
         self.addSubview(webView)
         webView.snp.makeConstraints { (maker) in
             maker.edges.equalTo(self)
         }
-        webView.uiDelegate = self
-        webView.navigationDelegate = self
         jsBase = WebViewJavascriptBridgeBase()
         bridge = WebViewJavascriptBridge.init(forWebView: webView)
         bridge.setWebViewDelegate(self)

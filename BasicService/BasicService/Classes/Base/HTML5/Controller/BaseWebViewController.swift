@@ -9,23 +9,12 @@
 import UIKit
 import WebKit
 import SnapKit
+import Toast
 
 let QQ_OAUTH2_URL = "http://oauth2.quchaogu.com/qq"
 
 open class BaseWebViewController: BaseViewController, DxwWebViewDelegate {
-    private var _url: String = ""
-    open var url: String {
-        get {
-            return _url;
-        }
-        set {
-            if !newValue.contains("#hy123") && newValue.contains(".pdf") {
-                _url = newValue + "#hy123"
-            }else{
-                _url = newValue
-            }
-        }
-    }
+    open var url: String = ""
     open var relativeUrl: String = "" {
         didSet {
             if relativeUrl.hasPrefix("/") {
@@ -33,7 +22,12 @@ open class BaseWebViewController: BaseViewController, DxwWebViewDelegate {
             }
         }
     }
-    open var headers: Dictionary<String, String>?
+    public var headers: Dictionary<String, String>?
+    public var webView: DxwWebView!
+    public var viewDidAppearCallBack: (() -> Void)?
+    public var needLoadingProgress: Bool = true
+    public var progressLeftColor: UIColor = HexColor("#ffcc00")
+    public var progressRightColor: UIColor = HexColor("#ffcc00")
     override open var param: Dictionary<String, Any>? {
         didSet {
             if param != nil {
@@ -49,7 +43,6 @@ open class BaseWebViewController: BaseViewController, DxwWebViewDelegate {
             }
         }
     }
-    public var needLoading: Bool = true
     public var needPopStack: Bool = true
     public var callBack: ((String) -> Void)?
     
@@ -78,6 +71,26 @@ open class BaseWebViewController: BaseViewController, DxwWebViewDelegate {
                 url = ServerType.base.rawValue + relativeUrl
             }
         }
+        if needLoadingProgress {
+            initProgressView()
+        }
+    }
+    
+    private func initProgressView() {
+        gradientView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 2))
+        gradientView.isHidden = true
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = gradientView.bounds
+        gradientLayer.zPosition = -1
+        gradientLayer.colors = [progressLeftColor.cgColor, progressRightColor.cgColor]
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+        gradientLayer.endPoint = CGPoint(x: 1, y: 0)
+        gradientView.layer.addSublayer(gradientLayer)
+        self.view.addSubview(gradientView)
+        
+        maskView = UIView(frame: gradientView.bounds)
+        maskView.backgroundColor = UIColor.white
+        gradientView?.addSubview(maskView)
     }
     
     override open func viewDidAppear(_ animated: Bool) {
@@ -110,30 +123,18 @@ open class BaseWebViewController: BaseViewController, DxwWebViewDelegate {
     }
     
     open func dxwWebViewStart(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-//        if needLoading{
-//            let tmpToast = ToastView.showMessage("加载中...", withParentView : self.webView, withTarget: nil, andAction: nil)
-//            if tmpToast != nil
-//            {
-//                _toastView      = tmpToast
-//            }
-//        }else
-//        {
-//            _toastView?.dismiss()
-//            _toastView  = nil
-//        }
+        progressStatus(.start)
     }
     
     open func dxwWebViewFinished(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         webView.evaluateJavaScript("document.title") { (data, error) in
             self.title = (data + "").count > 0 ? data + "" : "详情"
         }
-//        _toastView?.dismiss()
-//        _toastView  = nil
+        progressStatus(.end)
     }
     
     open func dxwWebViewFailed(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-//        _toastView?.dismiss()
-//        _toastView  = nil
+        progressStatus(.end)
     }
     
     open func dxwWebViewHasDecidePolicy(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
@@ -185,8 +186,36 @@ open class BaseWebViewController: BaseViewController, DxwWebViewDelegate {
         }
     }
     
-    
-    public var webView: DxwWebView!
-//    private var _toastView           : ToastView?
-    public var viewDidAppearCallBack: (() -> Void)?
+    private func progressStatus(_ status: ProgressStatus) {
+        if gradientView == nil || maskView == nil {
+            return
+        }
+        switch status {
+        case .start:
+            gradientView.isHidden = false
+            maskView.frame = gradientView.bounds
+            UIView.animate(withDuration: 2, delay: 0, options: UIView.AnimationOptions.curveEaseOut, animations: {
+                self.maskView.frame.origin.x = self.gradientView.bounds.width * 0.6
+            }) { (bool) in
+                self.progressStatus(.progressing)
+            }
+        case .progressing:
+            UIView.animate(withDuration: 1, delay: 0, options: UIView.AnimationOptions.curveEaseInOut, animations: {
+                self.maskView.frame.origin.x = self.gradientView.bounds.width * 0.9
+            }) { (bool) in
+            }
+        case .end:
+            UIView.animate(withDuration: 1, delay: 0, options: UIView.AnimationOptions.curveEaseIn, animations: {
+                self.maskView.frame.origin.x = self.gradientView.bounds.width
+            }) { (bool) in
+                self.gradientView.isHidden = true
+            }
+        }
+    }
+
+    private enum ProgressStatus: CaseIterable {
+        case start, progressing, end
+    }
+    private var gradientView: UIView!
+    private var maskView: UIView!
 }

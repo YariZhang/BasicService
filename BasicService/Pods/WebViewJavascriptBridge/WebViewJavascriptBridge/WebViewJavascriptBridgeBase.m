@@ -66,7 +66,7 @@ static int logMaxLength = 500;
         NSLog(@"WebViewJavascriptBridge: WARNING: ObjC got nil while fetching the message queue JSON from webview. This can happen if the WebViewJavascriptBridge JS is not currently present in the webview, e.g if the webview just loaded a new page.");
         return;
     }
-    
+
     id messages = [self _deserializeMessageJSON:messageQueueString];
     for (WVJBMessage* message in messages) {
         if (![message isKindOfClass:[WVJBMessage class]]) {
@@ -129,31 +129,19 @@ static int logMaxLength = 500;
     return [self isBridgeLoadedURL:url] || [self isQueueMessageURL:url];
 }
 
-- (BOOL)isSchemeMatch:(NSURL*)url
-{
-    return [self isLoadSchemaMatch:url] || [self isQueueSchemaMatch:url];
-}
-
-- (BOOL)isLoadSchemaMatch:(NSURL*)url
-{
+- (BOOL)isSchemeMatch:(NSURL*)url {
     NSString* scheme = url.scheme.lowercaseString;
     return [scheme isEqualToString:kNewProtocolScheme] || [scheme isEqualToString:kOldProtocolScheme];
 }
 
-- (BOOL)isQueueSchemaMatch:(NSURL*)url
-{
-    NSString* scheme = url.scheme.lowercaseString;
-    return [scheme isEqualToString:kQueueProtocSchema];
-}
-
 - (BOOL)isQueueMessageURL:(NSURL*)url {
     NSString* host = url.host.lowercaseString;
-    return [self isQueueSchemaMatch:url] && [host isEqualToString:kQueueHasMessage];
+    return [self isSchemeMatch:url] && [host isEqualToString:kQueueHasMessage];
 }
 
 - (BOOL)isBridgeLoadedURL:(NSURL*)url {
     NSString* host = url.host.lowercaseString;
-    return [self isLoadSchemaMatch:url] && [host isEqualToString:kBridgeLoaded];
+    return [self isSchemeMatch:url] && [host isEqualToString:kBridgeLoaded];
 }
 
 - (void)logUnkownMessage:(NSURL*)url {
@@ -199,10 +187,10 @@ static int logMaxLength = 500;
     messageJSON = [messageJSON stringByReplacingOccurrencesOfString:@"\u2028" withString:@"\\u2028"];
     messageJSON = [messageJSON stringByReplacingOccurrencesOfString:@"\u2029" withString:@"\\u2029"];
     
-    NSString* javascriptCommand = [NSString stringWithFormat:@"WebViewJavascriptBridge._handleMessageFromNative('%@');", messageJSON];
+    NSString* javascriptCommand = [NSString stringWithFormat:@"WebViewJavascriptBridge._handleMessageFromObjC('%@');", messageJSON];
     if ([[NSThread currentThread] isMainThread]) {
         [self _evaluateJavascript:javascriptCommand];
-        
+
     } else {
         dispatch_sync(dispatch_get_main_queue(), ^{
             [self _evaluateJavascript:javascriptCommand];

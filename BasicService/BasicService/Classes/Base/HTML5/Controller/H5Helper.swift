@@ -97,7 +97,7 @@ class H5Helpler {
         let bundleInfo = Bundle.main.infoDictionary
         let appVersion = bundleInfo?["CFBundleVersion"] + ""
         let appName = bundleInfo?["CFBundleName"] + ""
-        let value = ("\(appName)App:" + appVersion + "| \(sysName):\(version)" + " | Apple:" + "\(UtilTools.getDeviceModel())" + " | sc:\(SCREEN_WIDTH),\(SCREEN_HEIGHT)" + " | did:\(deviceid)" + " | qd:"  + " | av:\(glApiVersion)" + " | uid:\(UtilCookie.getCookieByKey("web_qtstr"))")
+        let value = ("\(appName)App:" + appVersion + "| \(sysName):\(version)" + " | Apple:" + "\(UtilTools.getDeviceModel())" + " | sc:\(SCREEN_WIDTH),\(SCREEN_HEIGHT)" + " | did:\(deviceid)" + " | av:\(BaseRequest.glApiVersion)" + " | uid:\(UtilCookie.getCookieByKey("web_qtstr"))")
         return value
     }
     
@@ -117,7 +117,6 @@ class H5Helpler {
                     UIApplication.shared.openURL(url)
                 }
                 decisionHandler(WKNavigationActionPolicy.cancel)
-//                ToastView.dismissAllToasts()
             }else if abStr.contains("/app/native/page") { //跳转原生页面
                 let query = url.query
                 if let params = query?.components(separatedBy: "&") {

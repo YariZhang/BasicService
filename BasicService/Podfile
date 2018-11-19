@@ -15,4 +15,21 @@ target 'BasicService' do
     pod 'MJRefresh',                '~> 3.1.15.7'
     pod 'MJExtension',              '~> 3.0.15.1'
     pod 'TYAttributedLabel',        '~> 2.6.2'
+    pod 'Toast',                    '~> 4.0.0'
+end
+
+target 'BasicServiceDemo' do
+    use_frameworks!
+    pod 'WebViewJavascriptBridge',  '~> 6.0.3'
+    pod 'QCGURLRouter',             '~> 0.0.2'
+    pod 'RxSwift',                  '~> 4.4.0'
+    pod 'RxCocoa',                  '~> 4.4.0'
+    pod 'SnapKit',                  '~> 4.2.0'
+    pod 'AFNetworking',             '~> 3.2.1'
+    pod 'SDWebImage',               '~> 4.4.2'
+    pod 'BlocksKit',                '~> 2.2.5'
+    pod 'MJRefresh',                '~> 3.1.15.7'
+    pod 'MJExtension',              '~> 3.0.15.1'
+    pod 'TYAttributedLabel',        '~> 2.6.2'
+    pod 'Toast',                    '~> 4.0.0'
 end

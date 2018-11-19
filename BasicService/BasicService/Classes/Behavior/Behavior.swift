@@ -92,7 +92,7 @@ public class Behavior: NSObject {
             dic["elog"] = eventId
             request = BehaviorERequest(paraDic: dic)
         }
-        request!.doRequest()
+        request?.doRequest()
     }
     
     public static var currentPage: String = ""

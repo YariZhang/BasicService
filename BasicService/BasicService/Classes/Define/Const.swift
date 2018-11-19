@@ -8,6 +8,7 @@
 
 import UIKit
 import QCGURLRouter
+import Toast
 
 public typealias DxwDic = Dictionary<String, Any>
 ///是否是iPhoneX
@@ -63,7 +64,7 @@ public func jumpPageNative(param: DxwDic, callBack: (() -> Void)? = nil) -> Bool
     let url = param["url"] + ""
     let para = param["param"] as? Dictionary<String, Any>
     if let uri = URL(string: url), !QCGURLRouter.shareInstance.route(withUrl: uri, param: para) {
-        UtilTools.showMessage(view: UIApplication.appTopViewController()?.view, msg: "无效跳转")
+        UIApplication.appTopViewController()?.view.makeToast("无效跳转", duration: 3, position: CSToastPositionBottom)
         return false
     }else{
         callBack?()

@@ -8,8 +8,7 @@
 
 import UIKit
 import AFNetworking
-
-public let glApiVersion: String = "1.0"
+import Toast
 
 public enum ServerType: String {
     case base = "http://api.quchaogu.com/"
@@ -37,14 +36,15 @@ public enum RequestOutputType: Int {
 
 open class BaseRequest: NSObject {
     
+    public static var glApiVersion: String = "1.0"
     public let requestManager : BaseHttpSessionManager = BaseHttpSessionManager.sharedOperationManager
     open var completionBlock: ((BaseModel) -> Void)?//请求完成的回调
     open var failureBlock: ((BaseError) -> Void)?//请求失败的回调
     open var isPostMethod: Bool = false
     open var timeout: TimeInterval = 20.0
+    public var requestParamDic: Dictionary<String, Any>? //请求所有参数
+    public var requestCommonDic: Dictionary<String, String>?//请求通用参数
     private var outputType: RequestOutputType = .json
-    private var requestParamDic: Dictionary<String, Any>? //请求所有参数
-    private var requestCommonDic: Dictionary<String, String>?//请求通用参数
     private var postFileParaDic: Dictionary<String, Any>?    //需要post上传的文件字典
     private var httpHeader: Dictionary<String , String>? = nil   //http头
 
@@ -61,7 +61,7 @@ open class BaseRequest: NSObject {
     }
     
     open func getRequestVersion() -> String {
-        return glApiVersion
+        return BaseRequest.glApiVersion
     }
     
     open func needRequestToast() -> Bool {
@@ -189,63 +189,64 @@ open class BaseRequest: NSObject {
         
         //StatusBar请求状态
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        UIApplication.shared.keyWindow?.hideToastActivity()
         
         if needRequestToast() {
-            //显示请求Toast
+            UIApplication.shared.keyWindow?.makeToastActivity(CSToastPositionCenter)
         }
         
         let requestSuccess =
+        {
+            (operation : URLSessionTask, responseObject : Any?) -> Void in
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            var baseData : BaseModel?
+            switch self.outputType {
+            case .json:
+                baseData = self.decodeJsonRequestData(responseDic: responseObject as? Dictionary<String,Any>)
+                if baseData != nil {
+                    //处理公共数据
+                }else{
+                }
+                break
+            case .xml:
+                baseData = self.decodeXmlRequestData(responseObject)
+                if baseData != nil{
+                    //处理公共数据
+                }
+                break
+            case .bin:
+                baseData = self.decodeBinRequestData(responseObject)
+                if baseData != nil{
+                    //处理公共数据
+                }
+                break
+            }
+            
+            if baseData != nil
             {
-                (operation : URLSessionTask, responseObject : Any?) -> Void in
-                UIApplication.shared.isNetworkActivityIndicatorVisible = false
-                var baseData : BaseModel?
-                switch self.outputType {
-                case .json:
-                    baseData = self.decodeJsonRequestData(responseDic: responseObject as? Dictionary<String,Any>)
-                    if baseData != nil {
-                        //处理公共数据
-                    }else{
-                    }
-                    break
-                case .xml:
-                    baseData = self.decodeXmlRequestData(responseObject)
-                    if baseData != nil{
-                        //处理公共数据
-                    }
-                    break
-                case .bin:
-                    baseData = self.decodeBinRequestData(responseObject)
-                    if baseData != nil{
-                        //处理公共数据
-                    }
-                    break
-                }
-                
-                if baseData != nil
-                {
-                    self.completionBlock?(baseData!)
-                }
-//                self.toastView?.dismiss()
+                self.completionBlock?(baseData!)
+            }
+            UIApplication.shared.keyWindow?.hideAllToasts()
         }
         
         let requestFailure =
+        {
+            (operation :URLSessionDataTask?, erro :Error) -> Void in
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            if self.failureBlock != nil
             {
-                (operation :URLSessionDataTask?, erro :Error) -> Void in
-                UIApplication.shared.isNetworkActivityIndicatorVisible = false
-                if self.failureBlock != nil
-                {
-                    var resError : BaseError?
-                    
-                    if erro._code == 404 {
-                        resError = BaseError(msg: "啊哦，服务君去火星旅行了~", error: erro, reqTask : operation)
-                    }else{
-                        resError = BaseError(msg: "网络异常(\(erro._code))", error: erro, reqTask : operation)
-                    }
-                    if resError != nil {
-                        self.failureBlock?(resError!)
-                    }
+                var resError : BaseError?
+                
+                if erro._code == 404 {
+                    resError = BaseError(msg: "啊哦，服务君去火星旅行了~", error: erro, reqTask : operation)
+                }else{
+                    resError = BaseError(msg: "网络异常(\(erro._code))", error: erro, reqTask : operation)
                 }
-//                self.toastView?.dismiss()
+                if resError != nil {
+                    self.failureBlock?(resError!)
+                }
+            }
+            UIApplication.shared.keyWindow?.hideAllToasts()
         }
         
         self.prepareCommonParameters()

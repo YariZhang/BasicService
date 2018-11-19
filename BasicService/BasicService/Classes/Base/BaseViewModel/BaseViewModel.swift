@@ -10,7 +10,6 @@ import UIKit
 import QCGURLRouter
 
 @objc public protocol ViewModelProtocol: NSObjectProtocol {
-    var viewModel: BaseViewModel! {set get}
     @objc optional func updateUI()
 }
 

@@ -13,7 +13,7 @@ open class BaseNavigationController: UINavigationController, UINavigationControl
     
     public var titleAttributes: [NSAttributedString.Key: Any] =
         [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18),
-         NSAttributedString.Key.foregroundColor: UIColor.black] {
+         NSAttributedString.Key.foregroundColor: UIColor.white] {
         didSet {
             navigationBar.titleTextAttributes = titleAttributes
         }

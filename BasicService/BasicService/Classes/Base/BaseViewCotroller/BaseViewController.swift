@@ -15,20 +15,18 @@ open class BaseViewController: UIViewController, UIGestureRecognizerDelegate, Vi
     public required init(parameters: Dictionary<String, Any>? = nil) {
         super.init(nibName: nil, bundle: nil)
         param = parameters
-        viewModel = getViewModelType().init(delegate: self)
     }
     
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        viewModel = getViewModelType().init(delegate: self)
     }
 
     public static var isTabChanged: Bool = false
     open var isTabVc: Bool = false
-    open var param : Dictionary<String, Any>? {
+    open var param: Dictionary<String, Any>? {
         didSet {
             referDic = param
-            viewModel.reqParam = param
+            paramDidChanged()
         }
     }
     public var baseBgView  : UIView!
@@ -50,13 +48,13 @@ open class BaseViewController: UIViewController, UIGestureRecognizerDelegate, Vi
             return self.view.backgroundColor
         }
     }
-    open var viewModel: BaseViewModel!
     public var isFirstLoad: Bool = true
     private var baseForeBackView : UIView!
     private var statusBarHidden : Bool = false
     private var referDic: Dictionary<String, Any>?
     private static var naviBarBgColor: UIColor? = HexColor("#fff")
     private static var contentBgColor: UIColor? = HexColor("#eeecf1")
+    private static var needPv: Bool = false
     
     override open func viewDidLoad() {
         super.viewDidLoad()
@@ -110,9 +108,14 @@ open class BaseViewController: UIViewController, UIGestureRecognizerDelegate, Vi
         }
     }
     
-    open func getViewModelType() -> BaseViewModel.Type {
-        return BaseViewModel.self
+    /**
+     页面参数更改
+     - returns: 无
+     */
+    open func paramDidChanged() {
+        
     }
+    
     /**
      初始化界面
      - returns: 无
@@ -192,7 +195,7 @@ open class BaseViewController: UIViewController, UIGestureRecognizerDelegate, Vi
     }
     
     open func needSendPv() -> Bool {
-        return true
+        return BaseViewController.needPv
     }
     
     open func getFrom() -> String {
@@ -263,5 +266,9 @@ extension BaseViewController {
     
     public class func setSharedContentBackgroundColor(_ color: UIColor?) {
         contentBgColor = color
+    }
+    
+    public class func setSharedControllerNeedPv(_ pv: Bool) {
+        needPv = pv
     }
 }

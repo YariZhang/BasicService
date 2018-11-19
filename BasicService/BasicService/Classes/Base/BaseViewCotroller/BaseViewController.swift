@@ -20,6 +20,7 @@ open class BaseViewController: UIViewController, UIGestureRecognizerDelegate, Vi
     
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        viewModel = getViewModelType().init(delegate: self)
     }
 
     public static var isTabChanged: Bool = false

@@ -189,6 +189,7 @@ open class BaseRequest: NSObject {
         
         //StatusBar请求状态
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        
         UIApplication.shared.keyWindow?.hideToastActivity()
         
         if needRequestToast() {
@@ -226,7 +227,7 @@ open class BaseRequest: NSObject {
             {
                 self.completionBlock?(baseData!)
             }
-            UIApplication.shared.keyWindow?.hideAllToasts()
+            UIApplication.shared.keyWindow?.hideToastActivity()
         }
         
         let requestFailure =
@@ -246,7 +247,7 @@ open class BaseRequest: NSObject {
                     self.failureBlock?(resError!)
                 }
             }
-            UIApplication.shared.keyWindow?.hideAllToasts()
+            UIApplication.shared.keyWindow?.hideToastActivity()
         }
         
         self.prepareCommonParameters()

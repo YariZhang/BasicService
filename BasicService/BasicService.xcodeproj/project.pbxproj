@@ -47,7 +47,6 @@
 		6B8E4B92219EA6FC00947536 /* DxwWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8E4B8A219EA6FC00947536 /* DxwWebView.swift */; };
 		807F9D20A58438A6E32D0455 /* Pods_BasicService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF722CAF2017D6417CD29BA1 /* Pods_BasicService.framework */; };
 		BCB0CF0FD59DC5C0CB3D0053 /* Pods_BasicServiceDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5735FEB80B0E15EEA67E4F9C /* Pods_BasicServiceDemo.framework */; };
-		F6D0322B344F64EC035218DD /* Pods_BasicService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B2398E521A24975009A7BE0 /* Pods_BasicService.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -148,7 +147,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				807F9D20A58438A6E32D0455 /* Pods_BasicService.framework in Frameworks */,
-				F6D0322B344F64EC035218DD /* Pods_BasicService.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

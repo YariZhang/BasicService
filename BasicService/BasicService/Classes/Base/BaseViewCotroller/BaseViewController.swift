@@ -29,7 +29,7 @@ open class BaseViewController: UIViewController, UIGestureRecognizerDelegate, Vi
             paramDidChanged()
         }
     }
-    public var baseBgView  : UIView!
+    public var baseBgView: UIView!
     public var disposeBag = DisposeBag()
     open var naviBarBackgroundColor: UIColor? {
         set {

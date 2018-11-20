@@ -8,12 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		6B2398DC21A2496C009A7BE0 /* BasicService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B8E4AEC219E5C9100947536 /* BasicService.framework */; };
+		6B23991521A2B22B009A7BE0 /* UCSignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2398FB21A2B22A009A7BE0 /* UCSignupViewModel.swift */; };
+		6B23991621A2B22B009A7BE0 /* UCLoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2398FC21A2B22A009A7BE0 /* UCLoginViewModel.swift */; };
+		6B23991721A2B22B009A7BE0 /* UCLoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2398FE21A2B22A009A7BE0 /* UCLoginRequest.swift */; };
+		6B23991821A2B22B009A7BE0 /* UCExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B23990021A2B22A009A7BE0 /* UCExtension.swift */; };
+		6B23991921A2B22B009A7BE0 /* UCSignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B23990421A2B22A009A7BE0 /* UCSignupViewController.swift */; };
+		6B23991A21A2B22B009A7BE0 /* UCLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B23990521A2B22A009A7BE0 /* UCLoginViewController.swift */; };
+		6B23991B21A2B22B009A7BE0 /* UserCenter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B23990621A2B22A009A7BE0 /* UserCenter.storyboard */; };
+		6B23991C21A2B22B009A7BE0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B23990D21A2B22A009A7BE0 /* ViewController.swift */; };
+		6B23991F21A2B22B009A7BE0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B23991421A2B22B009A7BE0 /* Assets.xcassets */; };
+		6B23992021A2B308009A7BE0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B23990E21A2B22A009A7BE0 /* Main.storyboard */; };
+		6B23992121A2B327009A7BE0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B23991121A2B22B009A7BE0 /* LaunchScreen.storyboard */; };
+		6B23992321A2B37C009A7BE0 /* Bridge-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B23992221A2B37C009A7BE0 /* Bridge-Header.h */; };
 		6B8E4AF6219E5C9100947536 /* BasicService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B8E4AEC219E5C9100947536 /* BasicService.framework */; };
 		6B8E4B0D219E5CD400947536 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8E4B0C219E5CD400947536 /* AppDelegate.swift */; };
-		6B8E4B0F219E5CD400947536 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8E4B0E219E5CD400947536 /* ViewController.swift */; };
-		6B8E4B12219E5CD400947536 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B8E4B10219E5CD400947536 /* Main.storyboard */; };
-		6B8E4B14219E5CD600947536 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B8E4B13219E5CD600947536 /* Assets.xcassets */; };
-		6B8E4B17219E5CD600947536 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B8E4B15219E5CD600947536 /* LaunchScreen.storyboard */; };
 		6B8E4B22219E5CD600947536 /* BasicServiceDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8E4B21219E5CD600947536 /* BasicServiceDemoTests.swift */; };
 		6B8E4B2D219E5CD600947536 /* BasicServiceDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8E4B2C219E5CD600947536 /* BasicServiceDemoUITests.swift */; };
 		6B8E4B5A219E60E900947536 /* BehaviorRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8E4B40219E60E900947536 /* BehaviorRequest.swift */; };
@@ -93,15 +101,23 @@
 		6B2398F321A24975009A7BE0 /* TYAttributedLabel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TYAttributedLabel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B2398F521A24975009A7BE0 /* WebViewJavascriptBridge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WebViewJavascriptBridge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B2398F721A24997009A7BE0 /* AFNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AFNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6B2398FB21A2B22A009A7BE0 /* UCSignupViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UCSignupViewModel.swift; sourceTree = "<group>"; };
+		6B2398FC21A2B22A009A7BE0 /* UCLoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UCLoginViewModel.swift; sourceTree = "<group>"; };
+		6B2398FE21A2B22A009A7BE0 /* UCLoginRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UCLoginRequest.swift; sourceTree = "<group>"; };
+		6B23990021A2B22A009A7BE0 /* UCExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UCExtension.swift; sourceTree = "<group>"; };
+		6B23990421A2B22A009A7BE0 /* UCSignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UCSignupViewController.swift; sourceTree = "<group>"; };
+		6B23990521A2B22A009A7BE0 /* UCLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UCLoginViewController.swift; sourceTree = "<group>"; };
+		6B23990621A2B22A009A7BE0 /* UserCenter.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UserCenter.storyboard; sourceTree = "<group>"; };
+		6B23990D21A2B22A009A7BE0 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		6B23990F21A2B22A009A7BE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		6B23991221A2B22B009A7BE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		6B23991421A2B22B009A7BE0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6B23992221A2B37C009A7BE0 /* Bridge-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bridge-Header.h"; sourceTree = "<group>"; };
 		6B8E4AEC219E5C9100947536 /* BasicService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BasicService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B8E4AF0219E5C9100947536 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6B8E4AF5219E5C9100947536 /* BasicServiceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BasicServiceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B8E4B0A219E5CD400947536 /* BasicServiceDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BasicServiceDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B8E4B0C219E5CD400947536 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		6B8E4B0E219E5CD400947536 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		6B8E4B11219E5CD400947536 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		6B8E4B13219E5CD600947536 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		6B8E4B16219E5CD600947536 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6B8E4B18219E5CD600947536 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6B8E4B1D219E5CD600947536 /* BasicServiceDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BasicServiceDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B8E4B21219E5CD600947536 /* BasicServiceDemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicServiceDemoTests.swift; sourceTree = "<group>"; };
@@ -195,6 +211,125 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		6B2398F921A2B22A009A7BE0 /* UserCenter */ = {
+			isa = PBXGroup;
+			children = (
+				6B2398FA21A2B22A009A7BE0 /* ViewModel */,
+				6B2398FD21A2B22A009A7BE0 /* Net */,
+				6B2398FF21A2B22A009A7BE0 /* Extension */,
+				6B23990121A2B22A009A7BE0 /* Model */,
+				6B23990221A2B22A009A7BE0 /* View */,
+				6B23990321A2B22A009A7BE0 /* ViewController */,
+			);
+			path = UserCenter;
+			sourceTree = "<group>";
+		};
+		6B2398FA21A2B22A009A7BE0 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				6B2398FB21A2B22A009A7BE0 /* UCSignupViewModel.swift */,
+				6B2398FC21A2B22A009A7BE0 /* UCLoginViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		6B2398FD21A2B22A009A7BE0 /* Net */ = {
+			isa = PBXGroup;
+			children = (
+				6B2398FE21A2B22A009A7BE0 /* UCLoginRequest.swift */,
+			);
+			path = Net;
+			sourceTree = "<group>";
+		};
+		6B2398FF21A2B22A009A7BE0 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				6B23990021A2B22A009A7BE0 /* UCExtension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		6B23990121A2B22A009A7BE0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		6B23990221A2B22A009A7BE0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6B23990321A2B22A009A7BE0 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6B23990421A2B22A009A7BE0 /* UCSignupViewController.swift */,
+				6B23990521A2B22A009A7BE0 /* UCLoginViewController.swift */,
+				6B23990621A2B22A009A7BE0 /* UserCenter.storyboard */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		6B23990721A2B22A009A7BE0 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				6B23990821A2B22A009A7BE0 /* ViewModel */,
+				6B23990921A2B22A009A7BE0 /* Net */,
+				6B23990A21A2B22A009A7BE0 /* Model */,
+				6B23990B21A2B22A009A7BE0 /* View */,
+				6B23990C21A2B22A009A7BE0 /* ViewController */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		6B23990821A2B22A009A7BE0 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		6B23990921A2B22A009A7BE0 /* Net */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Net;
+			sourceTree = "<group>";
+		};
+		6B23990A21A2B22A009A7BE0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		6B23990B21A2B22A009A7BE0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6B23990C21A2B22A009A7BE0 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6B23990D21A2B22A009A7BE0 /* ViewController.swift */,
+				6B23990E21A2B22A009A7BE0 /* Main.storyboard */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		6B23991021A2B22B009A7BE0 /* SbXib */ = {
+			isa = PBXGroup;
+			children = (
+				6B23991121A2B22B009A7BE0 /* LaunchScreen.storyboard */,
+			);
+			path = SbXib;
+			sourceTree = "<group>";
+		};
 		6B8E4AE2219E5C9100947536 = {
 			isa = PBXGroup;
 			children = (
@@ -233,11 +368,12 @@
 			isa = PBXGroup;
 			children = (
 				6B8E4B0C219E5CD400947536 /* AppDelegate.swift */,
-				6B8E4B0E219E5CD400947536 /* ViewController.swift */,
-				6B8E4B10219E5CD400947536 /* Main.storyboard */,
-				6B8E4B13219E5CD600947536 /* Assets.xcassets */,
-				6B8E4B15219E5CD600947536 /* LaunchScreen.storyboard */,
+				6B23990721A2B22A009A7BE0 /* Home */,
+				6B23991021A2B22B009A7BE0 /* SbXib */,
+				6B2398F921A2B22A009A7BE0 /* UserCenter */,
+				6B23991421A2B22B009A7BE0 /* Assets.xcassets */,
 				6B8E4B18219E5CD600947536 /* Info.plist */,
+				6B23992221A2B37C009A7BE0 /* Bridge-Header.h */,
 			);
 			path = BasicServiceDemo;
 			sourceTree = "<group>";
@@ -430,6 +566,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B23992321A2B37C009A7BE0 /* Bridge-Header.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -601,9 +738,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6B8E4B17219E5CD600947536 /* LaunchScreen.storyboard in Resources */,
-				6B8E4B14219E5CD600947536 /* Assets.xcassets in Resources */,
-				6B8E4B12219E5CD400947536 /* Main.storyboard in Resources */,
+				6B23992121A2B327009A7BE0 /* LaunchScreen.storyboard in Resources */,
+				6B23992021A2B308009A7BE0 /* Main.storyboard in Resources */,
+				6B23991B21A2B22B009A7BE0 /* UserCenter.storyboard in Resources */,
+				6B23991F21A2B22B009A7BE0 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -802,8 +940,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6B8E4B0F219E5CD400947536 /* ViewController.swift in Sources */,
+				6B23991521A2B22B009A7BE0 /* UCSignupViewModel.swift in Sources */,
+				6B23991921A2B22B009A7BE0 /* UCSignupViewController.swift in Sources */,
+				6B23991821A2B22B009A7BE0 /* UCExtension.swift in Sources */,
+				6B23991C21A2B22B009A7BE0 /* ViewController.swift in Sources */,
+				6B23991621A2B22B009A7BE0 /* UCLoginViewModel.swift in Sources */,
 				6B8E4B0D219E5CD400947536 /* AppDelegate.swift in Sources */,
+				6B23991A21A2B22B009A7BE0 /* UCLoginViewController.swift in Sources */,
+				6B23991721A2B22B009A7BE0 /* UCLoginRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -844,18 +988,18 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		6B8E4B10219E5CD400947536 /* Main.storyboard */ = {
+		6B23990E21A2B22A009A7BE0 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				6B8E4B11219E5CD400947536 /* Base */,
+				6B23990F21A2B22A009A7BE0 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		6B8E4B15219E5CD600947536 /* LaunchScreen.storyboard */ = {
+		6B23991121A2B22B009A7BE0 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				6B8E4B16219E5CD600947536 /* Base */,
+				6B23991221A2B22B009A7BE0 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -1095,6 +1239,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.quchaogu.BasicServiceDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "BasicServiceDemo/Bridge-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1115,6 +1260,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.quchaogu.BasicServiceDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "BasicServiceDemo/Bridge-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

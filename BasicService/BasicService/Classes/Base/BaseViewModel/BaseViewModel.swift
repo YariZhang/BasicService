@@ -43,7 +43,7 @@ open class BaseViewModel: NSObject {
     }
     
     ///代理
-    private weak var delegate: ViewModelProtocol?
+    public weak var delegate: ViewModelProtocol?
     private var task: URLSessionDataTask?
     
     required public init(delegate: ViewModelProtocol?) {

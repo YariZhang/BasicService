@@ -16,6 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        AFNetworkReachabilityManager.shared().startMonitoring()
+        BaseViewController.setSharedNaviBarBackgroundColor(HexColor("#2371e9"))
         return true
     }
 

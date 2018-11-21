@@ -11,10 +11,10 @@ import UIKit
 public let TAB_BOTTOM_HEIGHT: CGFloat = 50 + (IS_IPHONE_X ? 34 : 0)
 
 public class BaseTabBarItemData: NSObject {
-    var text: String = ""
-    var backImage: UIImage?
-    var normalImage: UIImage?
-    var selectedImage: UIImage?
+    public var text: String = ""
+    public var backImage: UIImage?
+    public var normalImage: UIImage?
+    public var selectedImage: UIImage?
 }
 
 public protocol BaseTabBarDelegate : NSObjectProtocol {
@@ -85,7 +85,7 @@ public class BaseTabBar: BaseView, BaseTabItemDelegate {
         }
     }
     ///是否需要分割线
-    var needSep: Bool = true {
+    public var needSep: Bool = true {
         didSet {
             sepLine?.isHidden = !needSep
         }
@@ -185,19 +185,19 @@ public class BaseTabBar: BaseView, BaseTabItemDelegate {
     }
     
     ///设置badge的内容
-    func setBadgeAtIndex(_ index : Int , info : AnyObject?) {
+    public func setBadgeAtIndex(_ index : Int , info : AnyObject?) {
         if let item = self.viewWithTag(index + 100) as? BaseTabItem {
             item.badgeInfo  = info
         }
     }
     
     ///重新加载数据
-    func reloadData() {
+    public func reloadData() {
         initItems()
         relayoutUI()
     }
     ///重新布局到新的view中
-    func relayoutUI() {
+    public func relayoutUI() {
         guard let v = delegate?.tabBarAddToView(self) else {
             return
         }

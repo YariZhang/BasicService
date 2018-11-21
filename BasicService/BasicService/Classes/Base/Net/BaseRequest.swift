@@ -180,16 +180,8 @@ open class BaseRequest: NSObject {
         }else{
             return nil
         }
-        if !(AFNetworkReachabilityManager.shared().isReachable) {
-            let error : NSError = NSError(domain: "no network!", code: 10001, userInfo: ["reqUrl" : reqUrl])
-            let resError : BaseError = BaseError(msg: "网络未连接", error: error, reqTask : nil)
-            failureBlock?(resError)
-            return nil
-        }
-        
         //StatusBar请求状态
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        
         UIApplication.shared.keyWindow?.hideToastActivity()
         
         if needRequestToast() {

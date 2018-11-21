@@ -104,6 +104,7 @@ open class BaseViewController: UIViewController, UIGestureRecognizerDelegate, Vi
             if !to.contains("/?") {
                 let from: String = self.getFrom()
                 Behavior.eventReport("", isPage: true, from: from, to: to)
+                BaseViewController.isTabChanged = false
             }
         }
     }

@@ -27,7 +27,7 @@ open class DxwWebView: BaseView, WKUIDelegate, WKNavigationDelegate {
     public var jsBase: WebViewJavascriptBridgeBase!
     private var oriUrl: String = ""
     
-    convenience init(url : String) {
+    convenience public init(url : String) {
         self.init(frame: CGRect.zero)
         oriUrl = url
         if oriUrl.contains("pdf") {
@@ -35,7 +35,7 @@ open class DxwWebView: BaseView, WKUIDelegate, WKNavigationDelegate {
         }
     }
     
-    override init(frame: CGRect) {
+    override public init(frame: CGRect) {
         super.init(frame: CGRect.zero)
         if !oriUrl.contains("pdf") {
             self.initUI()

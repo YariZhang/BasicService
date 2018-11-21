@@ -10,7 +10,7 @@ import UIKit
 
 open class BaseButton: UIButton {
 
-    override init(frame: CGRect) {
+    override public init(frame: CGRect) {
         super.init(frame: frame)
         self.isExclusiveTouch         = enableMultiTouch
     }

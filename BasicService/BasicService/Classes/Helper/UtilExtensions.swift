@@ -267,4 +267,8 @@ public extension UIApplication {
         }
         return root
     }
+    
+    public func getReferNavi() -> BaseNavigationController? {
+        return nil
+    }
 }

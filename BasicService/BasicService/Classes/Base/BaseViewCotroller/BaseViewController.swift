@@ -211,8 +211,16 @@ open class BaseViewController: UIViewController, UIGestureRecognizerDelegate, Vi
     
     open func getFrom() -> String {
         var from: String = "-"
-        if let vc = UIApplication.appTopViewController() as? BaseViewController {
-            from = vc.getTo()
+        if let cons = self.navigationController?.viewControllers {
+            if cons.count > 1 {
+                from = (cons[cons.count - 2] as! BaseViewController).getTo()
+            }else{
+                if UIApplication.shared.getReferNavi() == nil {
+                    from = "-"
+                }else{
+                    from = (UIApplication.shared.getReferNavi()!.viewControllers.last as! BaseViewController).getTo()
+                }
+            }
         }
         if let p = referDic {
             if let ref = p["refer"] {
@@ -227,11 +235,11 @@ open class BaseViewController: UIViewController, UIGestureRecognizerDelegate, Vi
         if self.referDic != nil && !self.referDic!.isEmpty {
             para = "?"
             for (key, value) in self.referDic! {
-                para += "\(key)=\(value)&"
+                para  += "\(key)=\(value)&"
             }
             para = String(para[..<para.index(para.endIndex, offsetBy: -1)])
         }
-        return getVcId() + para
+        return self.getVcId() + para
     }
     
     open func getVcId() -> String {

@@ -215,10 +215,10 @@ open class BaseViewController: UIViewController, UIGestureRecognizerDelegate, Vi
             if cons.count > 1 {
                 from = (cons[cons.count - 2] as! BaseViewController).getTo()
             }else{
-                if UIApplication.shared.getReferNavi() == nil {
+                if BaseNavigationController.referNavi == nil {
                     from = "-"
                 }else{
-                    from = (UIApplication.shared.getReferNavi()!.viewControllers.last as! BaseViewController).getTo()
+                    from = (BaseNavigationController.referNavi!.viewControllers.last as! BaseViewController).getTo()
                 }
             }
         }

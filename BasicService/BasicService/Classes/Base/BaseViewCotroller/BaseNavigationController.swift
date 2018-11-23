@@ -11,6 +11,8 @@ import SnapKit
 
 open class BaseNavigationController: UINavigationController, UINavigationControllerDelegate {
     
+    public static var referNavi: BaseNavigationController?
+    
     public var titleAttributes: [NSAttributedString.Key: Any] =
         [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18),
          NSAttributedString.Key.foregroundColor: UIColor.white] {

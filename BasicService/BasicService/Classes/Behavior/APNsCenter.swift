@@ -21,8 +21,9 @@ public struct PushMsgData {
 
 public class APNsCenter: NSObject, DxwPushAlertViewDelegate {
     
-    public static let center : APNsCenter = APNsCenter()
+    public static let shared : APNsCenter = APNsCenter()
     public var uInfo: [AnyHashable: Any]?
+    public var readPushBlock: (((url: String, param: Dictionary<String, Any>?)) -> Void)?
     
     public class func inputPushInfo(_ userInfo : [AnyHashable: Any] , isActivity : Bool = false) {
         let info = userInfo as! Dictionary<String , AnyObject>
@@ -39,11 +40,11 @@ public class APNsCenter: NSObject, DxwPushAlertViewDelegate {
                 td.para = action["para"] as? Dictionary<String, Any>
                 td.id = action["id"] + ""
                 let pushAlert = DxwPushAlertView()
-                pushAlert.delegate = center
+                pushAlert.delegate = shared
                 pushAlert.data = td
                 pushAlert.show()
             }
-            center.uInfo = userInfo
+            shared.uInfo = userInfo
             
         }else{
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(0.45 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) { () -> Void in
@@ -77,9 +78,7 @@ public class APNsCenter: NSObject, DxwPushAlertViewDelegate {
     public func dxwPushAlertViewDetail(type: String, url: String, param: DxwDic?) {
         Behavior.eventReport("push_read_fg", isPage: false,to : url)
         Behavior.behaviorRefer = "push_fg"
-        if let uri = URL(string: url) {
-            QCGURLRouter.shareInstance.route(withUrl: uri)
-        }
+        readPushBlock?((url, param))
     }
     
     public func dxwPushAlertViewOpenNoti() {

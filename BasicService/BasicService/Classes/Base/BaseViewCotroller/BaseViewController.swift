@@ -14,6 +14,7 @@ import Toast
 open class BaseViewController: UIViewController, UIGestureRecognizerDelegate, ViewModelProtocol, QCGURLReceiver {
     public required init(parameters: Dictionary<String, Any>? = nil) {
         super.init(nibName: nil, bundle: nil)
+        initData()
         param = parameters
     }
     
@@ -116,6 +117,15 @@ open class BaseViewController: UIViewController, UIGestureRecognizerDelegate, Vi
     open func paramDidChanged() {
         
     }
+    
+    /**
+     初始化数据
+     - returns: 无
+     */
+    open func initData() {
+        
+    }
+    
     
     /**
      初始化界面

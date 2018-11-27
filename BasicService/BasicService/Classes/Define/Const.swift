@@ -12,7 +12,11 @@ import Toast
 
 public typealias DxwDic = Dictionary<String, Any>
 ///是否是iPhoneX
-public let IS_IPHONE_X = UIScreen.main.currentMode?.size == CGSize(width: 1125, height: 2436)
+let CURRENT_SIZE    = UIScreen.main.currentMode?.size
+let IS_IPHONE_10    = CURRENT_SIZE == CGSize(width: 1125, height: 2436)
+let IS_IPHONE_XR    = CURRENT_SIZE == CGSize(width:750,height:1624)
+let IS_IPHONE_XSM   = CURRENT_SIZE == CGSize(width:1242,height:2688)
+let IS_IPHONE_X     = IS_IPHONE_10 || IS_IPHONE_XR || IS_IPHONE_XSM
 ///小屏幕手机（4）
 public let IS_SMALL_SCREEN = UIScreen.main.bounds.width < 375
 ///navi顶部的高度

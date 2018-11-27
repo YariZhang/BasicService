@@ -63,8 +63,8 @@ public class UtilTools {
         return name
     }
     
-    public class func getAppDelegate() -> UIApplication? {
-        return UIApplication.shared.delegate as? UIApplication
+    public class func getAppDelegate() -> UIApplicationDelegate? {
+        return UIApplication.shared.delegate
     }
     
     public class func getSessionId(needNew tag : Bool = false) -> String {

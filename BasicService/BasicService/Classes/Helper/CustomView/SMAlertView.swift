@@ -107,7 +107,7 @@ public class SMAlertView: UIView {
         _ = buttonsAttributes?.updateValue(attributes, forKey: index)
     }
     
-    public func show(inView view: UIView? = UtilTools.getAppDelegate()?.keyWindow) {
+    public func show(inView view: UIView? = UtilTools.getAppDelegate()?.window ?? nil) {
         guard view != nil else {
             return
         }

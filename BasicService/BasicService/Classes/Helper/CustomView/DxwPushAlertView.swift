@@ -27,11 +27,11 @@ public class DxwPushAlertView: BaseView, TYAttributedLabelDelegate {
     }
     
     public func show() {
-        if let tv = UtilTools.getAppDelegate()?.keyWindow?.viewWithTag(2018124) {
+        if let tv = UtilTools.getAppDelegate()?.window??.viewWithTag(2018124) {
             tv.removeFromSuperview()
         }
         self.tag = 2018124
-        UtilTools.getAppDelegate()?.keyWindow?.addSubview(self)
+        UtilTools.getAppDelegate()?.window??.addSubview(self)
         self.snp.makeConstraints { (maker) in
             maker.left.right.top.bottom.equalTo(self.superview!)
         }

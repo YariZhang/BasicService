@@ -32,7 +32,7 @@ public class APNsCenter: NSObject, DxwPushAlertViewDelegate {
         //let id      = action["id"] + ""
         if isActivity {
             if let aps = info["aps"] as? Dictionary<String , Any> {
-                UtilTools.getAppDelegate()?.keyWindow?.endEditing(true)
+                UtilTools.getAppDelegate()?.window??.endEditing(true)
                 var td = PushMsgData()
                 td.type = action["type"] + ""
                 td.url = action["url"] + ""

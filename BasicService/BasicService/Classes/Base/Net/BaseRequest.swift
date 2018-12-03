@@ -266,11 +266,11 @@ open class BaseRequest: NSObject {
                     for (_, value) in self.postFileParaDic! {
                         if value is String {
                             do {
-                                try formData.appendPart(withFileURL: NSURL.fileURL(withPath: value as! String), name: "fileName")
+                                try formData.appendPart(withFileURL: NSURL.fileURL(withPath: value as! String), name: "file")
                             }catch{
                             }
                         }else if value is Data {
-                            formData.appendPart(withForm: value as! Data, name: "fileBin")
+                            formData.appendPart(withForm: value as! Data, name: "file")
                         }else{
                             preconditionFailure("post文件只支持全路径和NSData两种类型")
                         }

@@ -212,8 +212,8 @@ open class BaseViewController: UIViewController, UIGestureRecognizerDelegate, Vi
     open func getFrom() -> String {
         var from: String = "-"
         if let cons = self.navigationController?.viewControllers {
-            if cons.count > 2 {
-                from = (cons[cons.count - 2] as! BaseViewController).getTo()
+            if cons.count > 1 {
+                from = (cons[cons.count - 2] as? BaseViewController)?.getTo() ?? "-"
             }else{
                 if BaseNavigationController.referNavi == nil {
                     from = "-"

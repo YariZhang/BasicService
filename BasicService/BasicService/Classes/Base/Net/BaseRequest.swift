@@ -357,12 +357,7 @@ open class BaseRequest: NSObject {
     }
     
     private func perpareCommonHeader() -> Void {
-        let device = UIDevice.current
-        let version = device.systemVersion
-        let sysName = device.systemName
-        let bundleInfo = Bundle.main.infoDictionary
-        let appVersion = bundleInfo!["CFBundleVersion"] + ""
-        let value = ("App:" + appVersion + "| \(sysName):\(version)" + "| device:\(UtilTools.getDeviceModel())")
+        let value = getUAStr()
         let dic = ["User-Agent" : value]
         self.addHttpHeader(header: dic)
     }

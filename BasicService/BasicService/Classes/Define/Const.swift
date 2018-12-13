@@ -100,3 +100,15 @@ public func jumpPage(info : Dictionary<String , Any>, isPush : Bool = false) {
         jumpPageNative(param: ["url": url, "param": para as Any])
     }
 }
+
+internal func getUAStr() -> String {
+    let device = UIDevice.current
+    let version = device.systemVersion
+    let sysName = device.systemName
+    let deviceid = UtilTools.getUniqueDeviceId()
+    let bundleInfo = Bundle.main.infoDictionary
+    let appVersion = bundleInfo?["CFBundleVersion"] + ""
+    let appName = bundleInfo?["CFBundleName"] + ""
+    let value = ("\(appName)App:" + appVersion + "| \(sysName):\(version)" + " | Apple:" + "\(UtilTools.getDeviceModel())" + " | sc:\(SCREEN_WIDTH),\(SCREEN_HEIGHT)" + " | did:\(deviceid)" + " | av:\(BaseRequest.glApiVersion)" + " | uid:\(UtilCookie.getCookieByKey("web_qtstr"))")
+    return value
+}

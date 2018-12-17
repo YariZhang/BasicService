@@ -7,7 +7,12 @@
 //
 
 import UIKit
-import QCGURLRouter
+
+class RequestTaskData {
+    var taskIdentifier: Int?
+    var taskUrl: String?
+    var task: URLSessionDataTask?
+}
 
 @objc public protocol ViewModelProtocol: NSObjectProtocol {
     @objc optional func updateUI()
@@ -44,7 +49,7 @@ open class BaseViewModel: NSObject {
     
     ///代理
     public weak var delegate: ViewModelProtocol?
-    private var task: URLSessionDataTask?
+    private lazy var tasks: Array<RequestTaskData> = Array()
     
     required public init(delegate: ViewModelProtocol?) {
         super.init()
@@ -55,21 +60,58 @@ open class BaseViewModel: NSObject {
         //TODO: 更新参数后逻辑
     }
     
-    public func doRequest(_ request : BaseRequest, completion : @escaping ((BaseModel?) -> Void), failure : @escaping ((BaseError?) -> Void)) {
-        request.completionBlock = completion
-        request.failureBlock = failure
-        task = request.doRequest()
+    @discardableResult
+    public func doRequest(_ request : BaseRequest, completion : @escaping ((BaseModel?) -> Void), failure : @escaping ((BaseError?) -> Void)) -> Int {
+        let url = request.getAbsoluteUrl() ?? (request.getServerType().rawValue + (request.getRelativeUrl() + ""))
+        request.completionBlock = {[weak self] model in
+            self?.removeTaskWithUrl(url)
+            completion(model)
+        }
+        request.failureBlock = {[weak self] error in
+            self?.removeTaskWithUrl(url)
+            failure(error)
+        }
+        let task = request.doRequest()
+        if task != nil {
+            var exist: Bool = false
+            for rtd in tasks {
+                if rtd.taskUrl == url {
+                    rtd.task?.cancel()
+                    rtd.task = task
+                    rtd.taskIdentifier = task?.taskIdentifier
+                    exist = true
+                }
+            }
+            if !exist {
+                let rtd = RequestTaskData()
+                rtd.taskIdentifier = task?.taskIdentifier
+                rtd.taskUrl = url
+                rtd.task = task
+                tasks.append(rtd)
+            }
+        }
+        return task?.taskIdentifier ?? 0
     }
     
-    public func cancelRequest() {
-        task?.cancel()
+    public func cancelRequest(id: Int?) {
+        _ = tasks.map { (id == nil || $0.taskIdentifier == id) ? $0.task?.cancel() : () }
+    }
+
+    public func suspendTask(id: Int?) {
+        _ = tasks.map { (id == nil || $0.taskIdentifier == id) ? $0.task?.suspend() : () }
+    }
+
+    public func resumeTask(id: Int?) {
+        _ = tasks.map { (id == nil || $0.taskIdentifier == id) ? $0.task?.resume() : () }
     }
     
-    public func suspendTask() {
-        task?.suspend()
-    }
-    
-    public func resumeTask() {
-        task?.resume()
+    private func removeTaskWithUrl(_ url: String) {
+        var list = Array<RequestTaskData>()
+        for rtd in tasks {
+            if rtd.taskUrl != url {
+                list.append(rtd)
+            }
+        }
+        tasks = list
     }
 }

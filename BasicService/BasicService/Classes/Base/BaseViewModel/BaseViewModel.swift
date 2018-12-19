@@ -62,7 +62,7 @@ open class BaseViewModel: NSObject {
     
     @discardableResult
     public func doRequest(_ request : BaseRequest, completion : @escaping ((BaseModel?) -> Void), failure : @escaping ((BaseError?) -> Void)) -> Int {
-        let url = request.getAbsoluteUrl() ?? (request.getServerType().rawValue + (request.getRelativeUrl() + ""))
+        let url = request.getAbsoluteUrl() ?? request.getRelatedUrl() ?? ""
         request.completionBlock = {[weak self] model in
             self?.removeTaskWithUrl(url)
             completion(model)
@@ -76,7 +76,9 @@ open class BaseViewModel: NSObject {
             var exist: Bool = false
             for rtd in tasks {
                 if rtd.taskUrl == url {
-                    rtd.task?.cancel()
+                    if request.needCancelSameReq() {
+                        rtd.task?.cancel()
+                    }
                     rtd.task = task
                     rtd.taskIdentifier = task?.taskIdentifier
                     exist = true

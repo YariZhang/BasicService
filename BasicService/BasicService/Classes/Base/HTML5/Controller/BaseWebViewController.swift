@@ -68,7 +68,7 @@ open class BaseWebViewController: BaseViewController, DxwWebViewDelegate {
             return
         }else{
             if relativeUrl.count > 0 {
-                url = ServerType.base.rawValue + relativeUrl
+                url = BaseRequest.glBaseServerUrl + relativeUrl
             }
         }
         if needLoadingProgress {

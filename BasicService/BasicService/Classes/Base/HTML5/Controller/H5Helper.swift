@@ -65,7 +65,7 @@ class H5Helpler {
     }
     
     private func isQcgURL(urlStr : String) -> Bool {
-        return urlStr.hasPrefix(ServerType.base.rawValue) || urlStr.hasPrefix(ServerType.uc.rawValue)
+        return urlStr.contains("quchaogu.com")
     }
     
     
@@ -147,9 +147,8 @@ class H5Helpler {
                     if abStr == "http://m.quchaogu.com" || abStr == "http://m.quchaogu.com/" || abStr == "http://api.quchaogu.com" || abStr == "http://api.quchaogu.com/" {
                         decisionHandler(WKNavigationActionPolicy.allow)
                     }else{
-                        if abStr.contains("m.quchaogu.com")
-                        {
-                            let aimStr = ServerType.base.rawValue
+                        if abStr.contains("m.quchaogu.com") {
+                            let aimStr = "http://api.quchaogu.com/"
                             abString = abStr.replacingOccurrences(of: "http://m.quchaogu.com", with: aimStr[..<aimStr.index(aimStr.endIndex, offsetBy: -1)])
                             if abString.contains("?") {
                                 H5Helpler.sharedInstance.loadUrlStr(webview: webView, urlStr: abString + "&res_type=html5")

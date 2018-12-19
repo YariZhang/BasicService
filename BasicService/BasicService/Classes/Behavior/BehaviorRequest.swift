@@ -8,8 +8,7 @@
 
 import UIKit
 
-final class BehaviorPRequest : BaseRequest
-{
+final class BehaviorPRequest : BaseRequest {
     required init(paraDic : Dictionary<String, Any>) {
         super.init()
         self.addReqParam(paraDic, isSign: false)
@@ -20,7 +19,7 @@ final class BehaviorPRequest : BaseRequest
     }
     
     override func getServerType() -> ServerType {
-        return ServerType.analyse
+        return .analyse("http://analytics.quchaogu.com/")
     }
     
     override func needRequestToast() -> Bool {
@@ -29,8 +28,7 @@ final class BehaviorPRequest : BaseRequest
 
 }
 
-final class BehaviorERequest : BaseRequest
-{
+final class BehaviorERequest : BaseRequest {
     required init(paraDic : Dictionary<String, String>) {
         super.init()
         self.addReqParam(paraDic, isSign: false)
@@ -41,7 +39,7 @@ final class BehaviorERequest : BaseRequest
     }
     
     override func getServerType() -> ServerType {
-        return ServerType.analyse
+        return .analyse("http://analytics.quchaogu.com/")
     }
     
     override func needRequestToast() -> Bool {

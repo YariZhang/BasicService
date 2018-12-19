@@ -10,10 +10,10 @@ import UIKit
 import AFNetworking
 import Toast
 
-public enum ServerType: String {
-    case base = "http://api.quchaogu.com/"
-    case uc = "http://ucapi.quchaogu.com/"
-    case analyse = "http://analytics.quchaogu.com/"
+public enum ServerType {
+    case base(String)
+    case uc(String)
+    case analyse(String)
 }
 
 public class BaseError: NSObject {
@@ -36,38 +36,74 @@ public enum RequestOutputType: Int {
 
 open class BaseRequest: NSObject {
     
+    ///默认api version， 用于整体版本提升
     public static var glApiVersion: String = "1.0"
+    ///默认服务器地址, 相对地址时不可为空
+    public static var glBaseServerUrl: String = ""
     public let requestManager : BaseHttpSessionManager = BaseHttpSessionManager.sharedOperationManager
-    open var completionBlock: ((BaseModel) -> Void)?//请求完成的回调
-    open var failureBlock: ((BaseError) -> Void)?//请求失败的回调
+    ///请求完成的回调
+    open var completionBlock: ((BaseModel) -> Void)?
+    ///请求失败的回调
+    open var failureBlock: ((BaseError) -> Void)?
+    ///请求方式get post
     open var isPostMethod: Bool = false
+    ///请求超时时长
     open var timeout: TimeInterval = 20.0
-    public var requestParamDic: Dictionary<String, Any>? //请求所有参数
-    public var requestCommonDic: Dictionary<String, String>?//请求通用参数
+    ///请求所有参数，不建议直接操作，建议用addReqParam方法添加请求参数
+    public var requestParamDic: Dictionary<String, Any>?
+    ///请求通用参数，可携带设备信息等通用信息
+    public var requestCommonDic: Dictionary<String, Any>?
     private var outputType: RequestOutputType = .json
     private var postFileParaDic: Dictionary<String, Any>?    //需要post上传的文件字典
     private var httpHeader: Dictionary<String , String>? = nil   //http头
 
+    /**
+     重写方法->相对链接服务器根目录类型
+     */
     open func getServerType() -> ServerType {
-        return ServerType.base
+        return .base(BaseRequest.glBaseServerUrl)
     }
     
+    /**
+     重写方法->相对链接url
+     */
     open func getRelativeUrl() -> String? {
         return nil
     }
     
+    /**
+     重写方法->绝对链接url
+     */
     open func getAbsoluteUrl() -> String? {
         return nil
     }
     
+    /**
+     重写方法->此接口的api version
+     */
     open func getRequestVersion() -> String {
         return BaseRequest.glApiVersion
     }
     
+    /**
+     重写方法->请求时是否需要弹出toast
+     */
     open func needRequestToast() -> Bool {
         return true
     }
     
+    /**
+     重写方法->请求时是否需要将上一次的相同请求取消
+     */
+    open func needCancelSameReq() -> Bool {
+        return true
+    }
+    
+    /**
+     重写方法->请求完成数据解析，json模式
+     - parameter responseDic: 返回的json对象
+     - returns: BaseModel对象
+     */
     open func decodeJsonRequestData(responseDic : Dictionary<String,Any>?) -> BaseModel? {
         guard responseDic != nil else {
             return nil
@@ -76,24 +112,35 @@ open class BaseRequest: NSObject {
         return baseData
     }
     
+    /**
+     重写方法->请求完成数据解析，bin模式
+     - parameter data: 返回的Data数据
+     - returns: BaseModel对象
+     */
     open func decodeBinRequestData(_ data : Any?) -> BaseModel? {
         preconditionFailure("The method 'decodeBinRequestData' must be overridden")
     }
     
+    /**
+     重写方法->请求完成数据解析，xml模式
+     - parameter responseDic: 返回的xml数据
+     - returns: BaseModel对象
+     */
     open func decodeXmlRequestData(_ data : Any?) -> BaseModel? {
         preconditionFailure("The method 'decodeXmlRequestData' must be overridden")
     }
     
+    /**
+     调用方法->设置请求数据返回的输出方式
+     - paramter type: 输出类型 json xml bin
+     - returns: 无
+     */
     public func setOutputType(type: RequestOutputType) {
         self.outputType = type
     }
     
-    public func setTimeoutSeconds(seconds : TimeInterval) {
-        self.timeout = seconds
-    }
-    
     /**
-     为请求增加参数。签名为后续做准备
+     调用方法->为请求增加参数。签名为后续做准备
      - parameter key:    参数键
      - parameter value:  参数值
      - parameter isSign: 该参数是否参与签名算法
@@ -113,7 +160,7 @@ open class BaseRequest: NSObject {
     }
     
     /**
-     为请求增加参数。签名为后续做准备
+     调用方法->为请求增加参数。签名为后续做准备
      - parameter key:    参数键
      - parameter value:  参数值
      - parameter isSign: 该参数是否参与签名算法
@@ -129,13 +176,17 @@ open class BaseRequest: NSObject {
         }
     }
     
+    /**
+     调用方法->为请求增加http请求头。
+     - parameter header: 请求头集合字典
+     - returns: 无
+     */
     public func addHttpHeader(header : Dictionary<String , String>?) {
         self.httpHeader = header
     }
     
     /**
-     上传文件，post文件地址
-    
+     调用方法->上传文件，post文件地址
      - parameter key:   文件参数key
      - parameter value: 文件值，绝对路径
      */
@@ -149,8 +200,7 @@ open class BaseRequest: NSObject {
         }
     }
     /**
-     上传文件，post文件元数据
-     
+     调用方法->上传文件，post文件元数据
      - parameter key:   文件参数key
      - parameter value: 文件二进制数据
      */
@@ -164,9 +214,8 @@ open class BaseRequest: NSObject {
         }
     }
     
-    
     /**
-     发起请求
+     调用方法->发起请求
      - parameter success: 请求完成的回调
      - parameter failure: 请求失败的回调
      */
@@ -175,8 +224,8 @@ open class BaseRequest: NSObject {
         var reqUrl = ""
         if let abs = getAbsoluteUrl() {
             reqUrl = abs
-        }else if let rel = getRelativeUrl() {
-            reqUrl = getServerType().rawValue + rel
+        }else if let rel = getRelatedUrl() {
+            reqUrl = rel
         }else{
             return nil
         }
@@ -231,9 +280,9 @@ open class BaseRequest: NSObject {
                 var resError : BaseError?
                 
                 if erro._code == 404 {
-                    resError = BaseError(msg: "啊哦，服务君去火星旅行了~", error: erro, reqTask : operation)
-                }else{
-                    resError = BaseError(msg: "网络异常(\(erro._code))", error: erro, reqTask : operation)
+                    resError = BaseError(msg: "服务器不可用", error: erro, reqTask : operation)
+                }else if erro._code != -999 {
+                    resError = BaseError(msg: "网络异常(code:\(erro._code))", error: erro, reqTask : operation)
                 }
                 if resError != nil {
                     self.failureBlock?(resError!)
@@ -287,6 +336,24 @@ open class BaseRequest: NSObject {
             }
             return requestManager.get(reqUrl, parameters: requestParamDic, progress: nil ,success: requestSuccess, failure: requestFailure)
         }
+    }
+    
+    internal func getRelatedUrl() -> String? {
+        if let rel = getRelativeUrl() {
+            var serverUrl = ""
+            switch getServerType() {
+            case .base(let url):
+                serverUrl = url
+            case .uc(let url):
+                serverUrl = url
+            case .analyse(let url):
+                serverUrl = url
+            }
+            if !serverUrl.isEmpty {
+                return serverUrl + rel
+            }
+        }
+        return nil
     }
     
     ///parameter中的<key:value>会update url中自带的<key,value>

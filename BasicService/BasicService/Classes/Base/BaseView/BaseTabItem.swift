@@ -149,7 +149,7 @@ class BaseTabItem: BaseView {
         self.addSubview(imageView)
         imageView.snp.makeConstraints { (maker) in
             maker.centerX.equalTo(self)
-            maker.top.equalTo(self).offset(10)
+            maker.top.equalTo(self).offset(8)
         }
         
         textLabel               = UILabel()
@@ -159,7 +159,7 @@ class BaseTabItem: BaseView {
         self.addSubview(textLabel)
         textLabel.snp.makeConstraints { (maker) in
             maker.centerX.equalTo(self)
-            maker.top.equalTo(self.imageView.snp.bottom).offset(4)
+            maker.top.equalTo(self.imageView.snp.bottom).offset(3)
         }
         
         badgeView               = BaseTabBadge(type: style)

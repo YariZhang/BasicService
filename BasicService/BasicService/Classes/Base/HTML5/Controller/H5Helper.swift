@@ -120,7 +120,7 @@ class H5Helpler {
                                 if let dic = tmpDic as? Dictionary<String,Any> {
                                     //let para = (dic["param"] as? Dictionary<String, AnyObject>) ?? [:]
                                     if let url1 = dic["url"] as? String, let uri = URL(string: url1) {
-                                        QCGURLRouter.shareInstance.route(withUrl: uri)
+                                        QCGURLRouter.shareInstance.route(withUrl: uri, param: dic["param"] as? DxwDic)
                                     }
                                 }
                             }catch

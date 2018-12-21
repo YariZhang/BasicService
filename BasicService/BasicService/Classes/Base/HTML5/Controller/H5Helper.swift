@@ -136,13 +136,15 @@ class H5Helpler {
                 decisionHandler(WKNavigationActionPolicy.cancel)
             }else{
                 if !abStr.contains("quchaogu.com") && !jsBase.isWebViewJavascriptBridgeURL(url) {
-                    if !QCGURLRouter.shareInstance.route(withUrl: url) {
-                        webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-                        webView.isMultipleTouchEnabled = true
-                        webView.isUserInteractionEnabled = true
-                        decisionHandler(WKNavigationActionPolicy.allow)
-                    }
+                    webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+                    webView.isMultipleTouchEnabled = true
+                    webView.isUserInteractionEnabled = true
+                    decisionHandler(WKNavigationActionPolicy.allow)
                 }else{
+                    guard !QCGURLRouter.shareInstance.route(withUrl: url) else {
+                        decisionHandler(WKNavigationActionPolicy.cancel)
+                        return
+                    }
                     var abString : String = abStr
                     if abStr == "http://m.quchaogu.com" || abStr == "http://m.quchaogu.com/" || abStr == "http://api.quchaogu.com" || abStr == "http://api.quchaogu.com/" {
                         decisionHandler(WKNavigationActionPolicy.allow)

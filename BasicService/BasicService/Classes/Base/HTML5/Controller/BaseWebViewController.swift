@@ -28,26 +28,26 @@ open class BaseWebViewController: BaseViewController, DxwWebViewDelegate {
     public var needLoadingProgress: Bool = true
     public var progressLeftColor: UIColor = HexColor("#ffcc00")
     public var progressRightColor: UIColor = HexColor("#ffcc00")
-    override open var param: Dictionary<String, Any>? {
-        didSet {
-            if param != nil {
-                if let url = param!["abUrl"] as? String {
-                    self.url = url
-                }else if let url = param!["url"] as? String {
-                    self.url = url
-                }
-                
-                if let relateUrl = param!["relativeUrl"] as? String {
-                    self.relativeUrl = relateUrl
-                }
-            }
-        }
-    }
     public var needPopStack: Bool = true
     public var callBack: ((String) -> Void)?
     
     deinit {
+        self.webView.delegate = nil
         self.webView = nil
+    }
+    
+    open override func initData() {
+        if param != nil {
+            if let url = param!["abUrl"] as? String {
+                self.url = url
+            }else if let url = param!["url"] as? String {
+                self.url = url
+            }
+            
+            if let relateUrl = param!["relativeUrl"] as? String {
+                self.relativeUrl = relateUrl
+            }
+        }
     }
     
     override open func initUI() {

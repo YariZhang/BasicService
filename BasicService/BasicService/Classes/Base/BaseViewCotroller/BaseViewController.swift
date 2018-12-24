@@ -14,8 +14,9 @@ import Toast
 open class BaseViewController: UIViewController, UIGestureRecognizerDelegate, ViewModelProtocol, QCGURLReceiver {
     public required init(parameters: Dictionary<String, Any>? = nil) {
         super.init(nibName: nil, bundle: nil)
-        initData()
         param = parameters
+        referDic = param
+        initData()
     }
     
     public required init?(coder aDecoder: NSCoder) {

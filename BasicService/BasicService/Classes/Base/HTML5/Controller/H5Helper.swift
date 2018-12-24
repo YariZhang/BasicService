@@ -12,7 +12,6 @@ import WebViewJavascriptBridge
 import QCGURLRouter
 
 fileprivate let APPLE_ITUNES_URL = "https://itunes.apple.com"
-fileprivate let JS_URL = "jbridge"
 
 class H5Helpler {
     var loginForOAuth2: ((String) -> Void)?
@@ -68,7 +67,6 @@ class H5Helpler {
         return urlStr.contains("quchaogu.com")
     }
     
-    
     func loadUrlStr(webview : WKWebView, urlStr : String, headers : Dictionary<String, Any> = [:]) {
         if let urlString = urlStr.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) {
             let urlStr = urlString.replacingOccurrences(of: "%23", with: "#")
@@ -90,14 +88,12 @@ class H5Helpler {
     }
     
     func handleH5Intercept(jsBase : WebViewJavascriptBridgeBase,  webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        if let url = navigationAction.request.url
-        {
+        if let url = navigationAction.request.url {
             let abStr = url.absoluteString
             if abStr.contains(QQ_OAUTH2_URL) {
                 loginForOAuth2?(abStr)
                 decisionHandler(WKNavigationActionPolicy.cancel)
-            }else if let scheme = url.scheme, (!scheme.contains("http") && !scheme.contains(JS_URL)) || abStr.contains(APPLE_ITUNES_URL)
-            {
+            }else if let scheme = url.scheme, (!scheme.contains("http") && !jsBase.isWebViewJavascriptBridgeURL(url)) || abStr.contains(APPLE_ITUNES_URL) {
                 if #available(iOS 10.0, *) {
                     UIApplication.shared.open(url)
                 }else{
@@ -118,13 +114,11 @@ class H5Helpler {
                             do {
                                 let tmpDic = try JSONSerialization.jsonObject(with: jsonData, options: JSONSerialization.ReadingOptions.mutableContainers)
                                 if let dic = tmpDic as? Dictionary<String,Any> {
-                                    //let para = (dic["param"] as? Dictionary<String, AnyObject>) ?? [:]
                                     if let url1 = dic["url"] as? String, let uri = URL(string: url1) {
                                         QCGURLRouter.shareInstance.route(withUrl: uri, param: dic["param"] as? DxwDic)
                                     }
                                 }
-                            }catch
-                            {
+                            }catch{
                                 decisionHandler(WKNavigationActionPolicy.cancel)
                                 return
                             }
@@ -132,48 +126,19 @@ class H5Helpler {
                         }
                     }
                 }
-                
                 decisionHandler(WKNavigationActionPolicy.cancel)
             }else{
-                if !abStr.contains("quchaogu.com") && !jsBase.isWebViewJavascriptBridgeURL(url) {
+                guard !QCGURLRouter.shareInstance.route(withUrl: url) else {
+                    decisionHandler(WKNavigationActionPolicy.cancel)
+                    return
+                }
+                if !jsBase.isWebViewJavascriptBridgeURL(url) {
                     webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
                     webView.isMultipleTouchEnabled = true
                     webView.isUserInteractionEnabled = true
                     decisionHandler(WKNavigationActionPolicy.allow)
-                }else{
-                    guard !QCGURLRouter.shareInstance.route(withUrl: url) else {
-                        decisionHandler(WKNavigationActionPolicy.cancel)
-                        return
-                    }
-                    var abString : String = abStr
-                    if abStr == "http://m.quchaogu.com" || abStr == "http://m.quchaogu.com/" || abStr == "http://api.quchaogu.com" || abStr == "http://api.quchaogu.com/" {
-                        decisionHandler(WKNavigationActionPolicy.allow)
-                    }else{
-                        if abStr.contains("m.quchaogu.com") {
-                            let aimStr = "http://api.quchaogu.com/"
-                            abString = abStr.replacingOccurrences(of: "http://m.quchaogu.com", with: aimStr[..<aimStr.index(aimStr.endIndex, offsetBy: -1)])
-                            if abString.contains("?") {
-                                H5Helpler.sharedInstance.loadUrlStr(webview: webView, urlStr: abString + "&res_type=html5")
-                            }else{
-                                H5Helpler.sharedInstance.loadUrlStr(webview: webView, urlStr: abString + "?res_type=html5")
-                            }
-                            decisionHandler(WKNavigationActionPolicy.cancel)
-                        }else if isQcgURL(urlStr: abStr) && !abStr.contains("res_type"){
-                            if abString.contains("?") {
-                                H5Helpler.sharedInstance.loadUrlStr(webview: webView, urlStr: abString + "&res_type=html5")
-                            }else{
-                                H5Helpler.sharedInstance.loadUrlStr(webview: webView, urlStr: abString + "?res_type=html5")
-                            }
-                            decisionHandler(WKNavigationActionPolicy.cancel)
-                        }else{
-                            if !jsBase.isWebViewJavascriptBridgeURL(navigationAction.request.url!) {
-                                    decisionHandler(WKNavigationActionPolicy.allow)
-                            }
-                        }
-                    }
                 }
             }
         }
     }
-    
 }

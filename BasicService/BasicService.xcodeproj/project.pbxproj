@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6B04878721D1D48100FC629F /* DxwStockScrollCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B04878521D1D48100FC629F /* DxwStockScrollCell.swift */; };
+		6B04878821D1D48100FC629F /* DxwStockScrollHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B04878621D1D48100FC629F /* DxwStockScrollHeadView.swift */; };
 		6B2398DC21A2496C009A7BE0 /* BasicService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B8E4AEC219E5C9100947536 /* BasicService.framework */; };
 		6B23991521A2B22B009A7BE0 /* UCSignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2398FB21A2B22A009A7BE0 /* UCSignupViewModel.swift */; };
 		6B23991621A2B22B009A7BE0 /* UCLoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2398FC21A2B22A009A7BE0 /* UCLoginViewModel.swift */; };
@@ -87,6 +89,8 @@
 		4E2C27B9977B773E2D4C1C6A /* Pods-BasicServiceDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BasicServiceDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BasicServiceDemo/Pods-BasicServiceDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		5735FEB80B0E15EEA67E4F9C /* Pods_BasicServiceDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BasicServiceDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6861F104F26E1BD72D238B11 /* Pods-BasicService.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BasicService.release.xcconfig"; path = "Pods/Target Support Files/Pods-BasicService/Pods-BasicService.release.xcconfig"; sourceTree = "<group>"; };
+		6B04878521D1D48100FC629F /* DxwStockScrollCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DxwStockScrollCell.swift; sourceTree = "<group>"; };
+		6B04878621D1D48100FC629F /* DxwStockScrollHeadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DxwStockScrollHeadView.swift; sourceTree = "<group>"; };
 		6B2398DD21A24975009A7BE0 /* AFNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AFNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B2398DF21A24975009A7BE0 /* BlocksKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BlocksKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B2398E121A24975009A7BE0 /* MJExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MJExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -486,6 +490,8 @@
 				6B8E4B71219E67AC00947536 /* DxwPushAlertView.swift */,
 				6B8E4B54219E60E900947536 /* SMAlertView.swift */,
 				6B8E4B55219E60E900947536 /* GradientButton.swift */,
+				6B04878521D1D48100FC629F /* DxwStockScrollCell.swift */,
+				6B04878621D1D48100FC629F /* DxwStockScrollHeadView.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -922,8 +928,10 @@
 				6B8E4B5F219E60E900947536 /* BaseButton.swift in Sources */,
 				6B8E4B78219E6ABE00947536 /* BaseView.swift in Sources */,
 				6B8E4B7A219E6ABE00947536 /* BaseTabBadge.swift in Sources */,
+				6B04878821D1D48100FC629F /* DxwStockScrollHeadView.swift in Sources */,
 				6B8E4B79219E6ABE00947536 /* BaseTabItem.swift in Sources */,
 				6B8E4B7C219E6ABE00947536 /* BaseTabBar.swift in Sources */,
+				6B04878721D1D48100FC629F /* DxwStockScrollCell.swift in Sources */,
 				6B8E4B60219E60E900947536 /* BaseViewController.swift in Sources */,
 				6B8E4B5A219E60E900947536 /* BehaviorRequest.swift in Sources */,
 			);

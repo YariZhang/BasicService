@@ -253,7 +253,7 @@ public extension UIButton {
 }
 
 public extension UIApplication {
-    public class func appTopViewController(root: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
+    public class func appTopViewController(root: UIViewController? = UIApplication.shared.delegate?.window??.rootViewController) -> UIViewController? {
         if let navi = root as? UINavigationController {
             return appTopViewController(root: navi.visibleViewController)
         }
@@ -266,5 +266,16 @@ public extension UIApplication {
             return appTopViewController(root: presented)
         }
         return root
+    }
+    
+    public class func appTopNavigationController() -> UINavigationController? {
+        let currentVc = appTopViewController()
+        if let nvc = currentVc as? UINavigationController {
+            return nvc
+        }else if let nvc = currentVc?.navigationController {
+            return nvc
+        }else{
+            return nil
+        }
     }
 }

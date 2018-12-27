@@ -292,3 +292,10 @@ extension BaseViewController {
         needPv = pv
     }
 }
+
+extension BaseViewController {
+    ///判断当前controller是否显示
+    public var isVisible: Bool {
+        return self.isViewLoaded && self.view.window != nil
+    }
+}

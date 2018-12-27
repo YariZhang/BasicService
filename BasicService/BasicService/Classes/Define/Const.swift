@@ -67,12 +67,27 @@ public func logPrint<T>(_ message: T,
 public func jumpPageNative(param: DxwDic, callBack: (() -> Void)? = nil) -> Bool {
     let url = param["url"] + ""
     let para = param["param"] as? Dictionary<String, Any>
-    if let uri = URL(string: url), !QCGURLRouter.shareInstance.route(withUrl: uri, param: para) {
-        UIApplication.appTopViewController()?.view.makeToast("无效跳转", duration: 3, position: CSToastPositionBottom)
-        return false
+    if let uri = URL(string: url) {
+        let ex = QCGURLRouter.shareInstance.route(withUrl:uri, param: para)
+        if !ex {
+            if url.hasPrefix("http") {
+                let htmlVc = BaseWebViewController()
+                htmlVc.url = url
+                UIApplication.appTopNavigationController()?.pushViewController(htmlVc, animated: true)
+                return true
+            }else if url.isMatch("^([0-9a-zA-Z]+://)") {
+                UIApplication.shared.openURL(uri)
+                return true
+            }else{
+                UtilTools.getAppDelegate()?.window??.makeToast("页面不存在")
+                return false
+            }
+        }else{
+            callBack?()
+            return true
+        }
     }else{
-        callBack?()
-        return true
+        return false
     }
 }
 

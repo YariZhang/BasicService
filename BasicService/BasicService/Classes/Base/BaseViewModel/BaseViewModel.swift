@@ -15,6 +15,7 @@ class RequestTaskData {
 }
 
 @objc public protocol ViewModelProtocol: NSObjectProtocol {
+    @objc optional var tableView: UITableView? {get set}
     @objc optional func updateUI()
 }
 

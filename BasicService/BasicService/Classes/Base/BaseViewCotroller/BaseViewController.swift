@@ -15,7 +15,6 @@ open class BaseViewController: UIViewController, UIGestureRecognizerDelegate, Vi
     public required init(parameters: Dictionary<String, Any>? = nil) {
         super.init(nibName: nil, bundle: nil)
         param = parameters
-        referDic = param
         initData()
     }
     
@@ -27,7 +26,6 @@ open class BaseViewController: UIViewController, UIGestureRecognizerDelegate, Vi
     open var isTabVc: Bool = false
     open var param: Dictionary<String, Any>? {
         didSet {
-            referDic = param
             paramDidChanged()
         }
     }
@@ -53,7 +51,7 @@ open class BaseViewController: UIViewController, UIGestureRecognizerDelegate, Vi
     public var isFirstLoad: Bool = true
     private var baseForeBackView : UIView!
     private var statusBarHidden : Bool = false
-    private var referDic: Dictionary<String, Any>?
+    private var referDic: Dictionary<String, Any>? {return param}
     private static var naviBarBgColor: UIColor? = HexColor("#fff")
     private static var contentBgColor: UIColor? = HexColor("#eeecf1")
     private static var needPv: Bool = false

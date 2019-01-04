@@ -22,6 +22,7 @@
 		6B23992021A2B308009A7BE0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B23990E21A2B22A009A7BE0 /* Main.storyboard */; };
 		6B23992121A2B327009A7BE0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B23991121A2B22B009A7BE0 /* LaunchScreen.storyboard */; };
 		6B23992321A2B37C009A7BE0 /* Bridge-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B23992221A2B37C009A7BE0 /* Bridge-Header.h */; };
+		6B42341821DF3035007428CA /* DxwCentralTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B42341721DF3035007428CA /* DxwCentralTabView.swift */; };
 		6B8E4AF6219E5C9100947536 /* BasicService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B8E4AEC219E5C9100947536 /* BasicService.framework */; };
 		6B8E4B0D219E5CD400947536 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8E4B0C219E5CD400947536 /* AppDelegate.swift */; };
 		6B8E4B22219E5CD600947536 /* BasicServiceDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8E4B21219E5CD600947536 /* BasicServiceDemoTests.swift */; };
@@ -117,6 +118,7 @@
 		6B23991221A2B22B009A7BE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6B23991421A2B22B009A7BE0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6B23992221A2B37C009A7BE0 /* Bridge-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bridge-Header.h"; sourceTree = "<group>"; };
+		6B42341721DF3035007428CA /* DxwCentralTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DxwCentralTabView.swift; sourceTree = "<group>"; };
 		6B8E4AEC219E5C9100947536 /* BasicService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BasicService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B8E4AF0219E5C9100947536 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6B8E4AF5219E5C9100947536 /* BasicServiceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BasicServiceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -492,6 +494,7 @@
 				6B8E4B55219E60E900947536 /* GradientButton.swift */,
 				6B04878521D1D48100FC629F /* DxwStockScrollCell.swift */,
 				6B04878621D1D48100FC629F /* DxwStockScrollHeadView.swift */,
+				6B42341721DF3035007428CA /* DxwCentralTabView.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -922,6 +925,7 @@
 				6B8E4B91219EA6FC00947536 /* H5Helper.swift in Sources */,
 				6B8E4B63219E60E900947536 /* BaseModel.swift in Sources */,
 				6B8E4B7E219E6B1700947536 /* TabShowLabel.swift in Sources */,
+				6B42341821DF3035007428CA /* DxwCentralTabView.swift in Sources */,
 				6B8E4B5B219E60E900947536 /* APNsCenter.swift in Sources */,
 				6B8E4B62219E60E900947536 /* BaseViewModel.swift in Sources */,
 				6B8E4B7B219E6ABE00947536 /* ButtonForTab.swift in Sources */,

@@ -84,6 +84,7 @@ open class BaseViewController: UIViewController, UIGestureRecognizerDelegate, Vi
         if needSendPv() {
             sendPStatistics()
         }
+        glStatusBarStyle = .lightContent
     }
     
     override open func viewWillDisappear(_ animated: Bool) {

@@ -13,6 +13,10 @@ open class BaseNavigationController: UINavigationController, UINavigationControl
     
     public static var referNavi: BaseNavigationController?
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     public var titleAttributes: [NSAttributedString.Key: Any] =
         [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18),
          NSAttributedString.Key.foregroundColor: UIColor.white] {
@@ -31,6 +35,7 @@ open class BaseNavigationController: UINavigationController, UINavigationControl
         navigationBar.titleTextAttributes = titleAttributes
         navigationBar.isTranslucent = true
         self.view.bringSubviewToFront(self.navigationBar)
+        NotificationCenter.default.addObserver(self, selector: #selector(changeStatusBarStyle(noti:)), name: NAVIBAR_CHANGE, object: nil)
     }
     
     public func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
@@ -53,7 +58,18 @@ open class BaseNavigationController: UINavigationController, UINavigationControl
     }
     
     override open var preferredStatusBarStyle : UIStatusBarStyle {
-        return .lightContent
+        return glStatusBarStyle
+    }
+    
+    @objc func changeStatusBarStyle(noti : Notification) {
+        if glStatusBarStyle == .lightContent {
+            titleAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18),
+                               NSAttributedString.Key.foregroundColor: UIColor.white]
+        }else{
+            titleAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18),
+             NSAttributedString.Key.foregroundColor: HexColor(COLOR_COMMON_BLACK_3)]
+        }
+        self.setNeedsStatusBarAppearanceUpdate()
     }
     
     public var barBackView: UIView!

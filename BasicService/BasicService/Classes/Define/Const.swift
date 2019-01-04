@@ -10,6 +10,14 @@ import UIKit
 import QCGURLRouter
 import Toast
 
+public var glStatusBarStyle : UIStatusBarStyle = .lightContent {
+    didSet {
+        if glStatusBarStyle != oldValue {
+            NotificationCenter.default.post(name: NAVIBAR_CHANGE, object: nil)
+        }
+    }
+}
+
 public typealias DxwDic = Dictionary<String, Any>
 ///是否是iPhoneX
 public let CURRENT_SIZE    = UIScreen.main.currentMode?.size
@@ -115,6 +123,8 @@ public func jumpPage(info : Dictionary<String , Any>, isPush : Bool = false) {
         jumpPageNative(param: ["url": url, "param": para as Any])
     }
 }
+
+internal let NAVIBAR_CHANGE = Notification.Name("NavibarStatusChanged")
 
 internal func getUAStr() -> String {
     let device = UIDevice.current

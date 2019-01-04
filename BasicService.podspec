@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "BasicService"
-  s.version      = "0.3.2"
+  s.version      = "0.3.3"
   s.summary      = "base service for a project"
 
   # This description is used to generate tags and improve search results.
@@ -79,7 +79,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/YariZhang/BasicService.git", :tag => '#{s.version}' }
+  s.source       = { :git => "https://github.com/YariZhang/BasicService.git", :tag => "#{s.version}" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #

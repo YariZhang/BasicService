@@ -9,14 +9,20 @@ import AFNetworking
 
 public class BaseHttpSessionManager: AFHTTPSessionManager {
     public static var __once: () = {
-            let manager = BaseHttpSessionManager()
-            Inner.instance = manager
-            let securityPolicy = AFSecurityPolicy(pinningMode: AFSSLPinningMode.none)
-            securityPolicy.validatesDomainName = false
-            securityPolicy.allowInvalidCertificates = true
-            manager.requestSerializer.cachePolicy = NSURLRequest.CachePolicy.reloadIgnoringLocalCacheData
-            Inner.instance?.securityPolicy = securityPolicy
-        }()
+        let manager = BaseHttpSessionManager()
+        
+        let securityPolicy = AFSecurityPolicy(pinningMode: AFSSLPinningMode.none)
+        securityPolicy.validatesDomainName = false
+        securityPolicy.allowInvalidCertificates = true
+        manager.requestSerializer.cachePolicy = NSURLRequest.CachePolicy.reloadIgnoringLocalCacheData
+        manager.securityPolicy = securityPolicy
+        manager.responseSerializer.acceptableContentTypes = ["application/json",
+                                                             "text/json",
+                                                             "text/javascript",
+                                                             "text/html",
+                                                             "text/plain"]
+        Inner.instance = manager
+    }()
     
     public class var sharedOperationManager: BaseHttpSessionManager {
         _ = BaseHttpSessionManager.__once

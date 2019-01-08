@@ -226,6 +226,7 @@ open class DxwStockScrollHeadView: BaseView, DxwStockSortViewDelegate {
         })
         
         nameLabel = UILabel()
+        nameLabel?.textColor = HexColor(COLOR_COMMON_BLACK_9)
         nameLabel?.font = UIFont.normalFontOfSize(12)
         frontView?.addSubview(nameLabel!)
         nameLabel?.snp.makeConstraints({ (maker) in

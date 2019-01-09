@@ -10,6 +10,12 @@ import UIKit
 
 public class GradientButton: BaseButton {
     
+    override open var frame: CGRect {
+        didSet {
+            gradientLayer?.frame = frame
+        }
+    }
+    
     public var labelFont: UIFont? {
         didSet {
             label?.font = labelFont

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import QCGURLRouter
 
 @objc public protocol DxwStockScrollHeadViewDelegate: NSObjectProtocol {
     func dxwStockScrollHeadViewSorted(section: Int, index: Int, ad: String)
@@ -153,38 +154,38 @@ open class DxwStockScrollHeadView: BaseView, DxwStockSortViewDelegate {
         //外部链接view
         frontExtraView?.removeFromSuperview()
         if !(info.first?["page_id"] + "").isEmpty  {
-//            let setV = BaseButton()//(frame: CGRect(x: 7, y: 0.5, width: headW - 7, height: headH - 1))
-//            setV.storage = info.first?["page_id"] + ""
-//            setV.backgroundColor = self.backgroundColor
-//            setV.tag = 1030
-//            setV.contentHorizontalAlignment = .left
-//            setV.titleLabel?.font = UIFont.normalFontOfSize(16)
-//            setV.setTitleColor(HexColor(COLOR_COMMON_BLUE), for: .normal)
-//            setV.setHorizontalImage(UIImage(named: "seting_plate")!, title: "设置", space: 6)
-//            setV.addTarget(self, action: #selector(setting(btn:)), for: .touchUpInside)
-//            self.addSubview(setV)
-//            setV.snp.makeConstraints({ (maker) in
-//                maker.left.equalTo(self).offset(7)
-//                maker.centerY.equalTo(self)
-//                maker.width.equalTo(self.frontView!).offset(-7)
-//                maker.height.equalTo(self).offset(-1)
-//            })
-//            frontExtraView = setV
+            let setV = BaseButton()//(frame: CGRect(x: 7, y: 0.5, width: headW - 7, height: headH - 1))
+            setV.storage = info.first?["page_id"] + ""
+            setV.backgroundColor = self.backgroundColor
+            setV.tag = 1030
+            setV.contentHorizontalAlignment = .left
+            setV.titleLabel?.font = UIFont.normalFontOfSize(16)
+            setV.setTitleColor(HexColor(COLOR_COMMON_BLUE), for: .normal)
+            setV.setHorizontalImage(UIImage(named: "seting_plate")!, title: "设置", space: 6)
+            setV.addTarget(self, action: #selector(setting(btn:)), for: .touchUpInside)
+            self.addSubview(setV)
+            setV.snp.makeConstraints({ (maker) in
+                maker.left.equalTo(self).offset(7)
+                maker.centerY.equalTo(self)
+                maker.width.equalTo(self.frontView!).offset(-7)
+                maker.height.equalTo(self).offset(-1)
+            })
+            frontExtraView = setV
         }else if let extraView = delegate?.dxwStockScrollHeadViewFrontExtraView?(headView: self) {
             self.addSubview(extraView)
             frontExtraView = extraView
         }
     }
     
-//    @objc private func setting(btn: BaseButton) {
-//        if let pi = btn.storage as? String {
-//            var pv = (delegate as? BaseViewController)?.getVcId() + ""
-//            if pv.isEmpty {
-//                pv = ((delegate as? BaseViewModel)?.mController as? BaseViewController)?.getVCId().rawValue + ""
-//            }
-//            VCMediator.sharedInstance.go2VC(.StockEditVC, para: ["page_id": pi as AnyObject, "pv": pv as AnyObject])
-//        }
-//    }
+    @objc private func setting(btn: BaseButton) {
+        if let pi = btn.storage as? String {
+            var pv = (delegate as? BaseViewController)?.getVcId() + ""
+            if pv.isEmpty {
+                pv = (delegate as? BaseViewModel)?.controller?.getVcId() + ""
+            }
+            QCGURLRouter.shareInstance.route(withUrl: URL(string: "/cssz")!, param: ["page_id": pi, "pv": pv])
+        }
+    }
     
     override open func initUI() {
         super.initUI()

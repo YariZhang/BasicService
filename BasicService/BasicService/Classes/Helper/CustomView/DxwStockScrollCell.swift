@@ -264,6 +264,7 @@ open class DxwStockScrollCell: UITableViewCell, UIScrollViewDelegate {
         }
         
         lineBot = UIView()
+        lineBot?.backgroundColor = HexColor(COLOR_COMMON_SEP)
         self.addSubview(lineBot!)
         lineBot?.snp.makeConstraints({ (maker) in
             maker.left.equalTo(self)

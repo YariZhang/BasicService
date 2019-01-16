@@ -99,8 +99,13 @@ open class BaseViewController: UIViewController, UIGestureRecognizerDelegate, Vi
         isFirstLoad = false
     }
     
-    public func sendPStatistics() {
-        if isFirstLoad || (isTabVc && BaseViewController.isTabChanged) {
+    /**
+     发送页面统计记录
+     - parameter force: 强制发送，默认false
+     - returns: 无
+     */
+    public func sendPStatistics(force: Bool = false) {
+        if force || isFirstLoad || (isTabVc && BaseViewController.isTabChanged) {
             let to: String = self.getTo()
             if !to.contains("/?") {
                 let from: String = self.getFrom()

@@ -13,7 +13,17 @@ public class BaseHttpSessionManager: AFHTTPSessionManager {
         
         let securityPolicy = AFSecurityPolicy(pinningMode: AFSSLPinningMode.none)
         securityPolicy.validatesDomainName = false
-        securityPolicy.allowInvalidCertificates = true
+        securityPolicy.allowInvalidCertificates = true //是否信任非法证书https下false
+        //获取服务器证书 "openssl s_client -connect www.demodomain.com:443 </dev/null 2>/dev/null | openssl x509 -outform DER > https.cer"
+        //if let cerPath = Bundle.main.path(forResource: "https", ofType: "cer"), let uri = URL(string: cerPath) {
+        //  do {
+        //      let certData = try Data(contentsOf: uri)
+        //      securityPolicy.pinnedCertificates = [certData]
+        //  }catch{
+        //  }
+        //} //指定证书，不指定不需要
+        //securityPolicy.sslPinningMode = .certificate //开启证书验证
+        //securityPolicy.validatesDomainName = true
         manager.requestSerializer.cachePolicy = NSURLRequest.CachePolicy.reloadIgnoringLocalCacheData
         manager.securityPolicy = securityPolicy
         manager.responseSerializer.acceptableContentTypes = ["application/json",

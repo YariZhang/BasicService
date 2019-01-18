@@ -14,6 +14,7 @@ public func HexColor(_ hex: String) -> UIColor {
 }
 //-----------------------色值颜色--------------------------
 
+public var COLOR_COMMON_BASE_NAVI           = "#ec4e40"
 public let COLOR_COMMON_WHITE               = "#ffffff"
 public let COLOR_COMMON_WHITE_50            = "#ffffff7f"
 public let COLOR_COMMON_WHITE_60            = "#ffffff99"

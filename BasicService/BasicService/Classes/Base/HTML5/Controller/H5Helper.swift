@@ -36,7 +36,7 @@ class H5Helpler {
         if isQcgURL(urlStr: urlStr) {
             if !urlStr.contains("ua") {
                 let uaStr = getUAStr().addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-                if urlStr.contains("?") {
+                if urlStr.contains("?") || urlStr.contains("#") {
                     urlStr = urlStr + "&ua=" + uaStr
                 }else{
                     urlStr = urlStr + "?ua=" + uaStr

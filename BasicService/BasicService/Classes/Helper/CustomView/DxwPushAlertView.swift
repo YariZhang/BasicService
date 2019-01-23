@@ -56,7 +56,7 @@ public class DxwPushAlertView: BaseView, TYAttributedLabelDelegate {
         }
         
         topBar = UIImageView()
-        topBar.image = UIImage(named: "pushAlertTopBar")
+        topBar.image = UIImage(named: "push_notification_title")
         contentView.addSubview(topBar)
         topBar.snp.makeConstraints { (maker) in
             maker.left.right.top.equalTo(contentView)
@@ -120,7 +120,7 @@ public class DxwPushAlertView: BaseView, TYAttributedLabelDelegate {
         }
         
         closeBtn = BaseButton()
-        closeBtn.setImage(UIImage(named: "pushAlertClose"), for: .normal)
+        closeBtn.setImage(UIImage(named: "push_notification_close"), for: .normal)
         closeBtn.addTarget(self, action: #selector(buttonClick(btn:)), for: .touchUpInside)
         self.addSubview(closeBtn)
         closeBtn.snp.makeConstraints { (maker) in
@@ -148,7 +148,7 @@ public class DxwPushAlertView: BaseView, TYAttributedLabelDelegate {
         }else{
             detailLabel.text = data.content
             let storage = TYLinkTextStorage()
-            storage.textColor = HexColor(COLOR_COMMON_BLACK_3)
+            storage.textColor = HexColor(COLOR_COMMON_BASE_NAVI)
             storage.font = UIFont.normalFontOfSize(14)
             storage.text = "查看详情"
             detailLabel.appendTextStorage(storage)

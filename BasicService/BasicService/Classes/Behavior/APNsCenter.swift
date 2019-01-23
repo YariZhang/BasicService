@@ -107,6 +107,12 @@ public class APNsSetter: NSObject, SMAlertViewDelegate {
         }
     }
     
+    @available(iOS 10.0, *)
+    public class func registerNotification(unDelegate: UNUserNotificationCenterDelegate?) {
+        UNUserNotificationCenter.current().delegate = unDelegate
+        apnsSetter.registerForNotification()
+    }
+    
     public class func registerNotification() {
         apnsSetter.registerForNotification()
     }
@@ -125,10 +131,9 @@ public class APNsSetter: NSObject, SMAlertViewDelegate {
                 }else{
                 }
             })
-        }else{
-            let settings = UIUserNotificationSettings(types: [UIUserNotificationType.sound, UIUserNotificationType.badge, UIUserNotificationType.alert], categories: nil)
-            UIApplication.shared.registerUserNotificationSettings(settings)
         }
+        let settings = UIUserNotificationSettings(types: [UIUserNotificationType.sound, UIUserNotificationType.badge, UIUserNotificationType.alert], categories: nil)
+        UIApplication.shared.registerUserNotificationSettings(settings)
     }
     
     public class func checkNotification() {

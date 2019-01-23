@@ -102,9 +102,27 @@ open class DxwWebView: BaseView, WKUIDelegate, WKNavigationDelegate {
      */
     open func registerCommonJsFunctions() {
         registerJsFunctionForKey("ready", callBack: nil)
-        registerJsFunctionForKey("readStatisticsPara", callBack: nil)
-        registerJsFunctionForKey("readUserAgent", callBack: nil)
-        registerJsFunctionForKey("loadChartConfig", callBack: nil)
+        bridge?.registerHandler("readUserAgent") { (data,  callback) in
+            if callback != nil {
+                callback!(perpareUA())
+            }
+        }
+        bridge?.registerHandler("readStatisticsPara") {[weak self] (data,  callback) in
+            if callback != nil {
+                callback!(perpareStatisticsPara(delegate: self?.delegate))
+            }
+        }
+        bridge?.registerHandler("loadChartConfig", handler: { (data, callback) in
+            if callback != nil {
+                callback!(perpareChartConfig())
+            }
+        })
+        
+        bridge?.registerHandler("getUserInfo", handler: { (data, callback) in
+            if callback != nil {
+                callback!(perpareCookies())
+            }
+        })
     }
     
     /**

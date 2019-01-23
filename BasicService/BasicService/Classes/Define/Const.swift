@@ -137,3 +137,41 @@ internal func getUAStr() -> String {
     let value = ("\(appName)App:" + appVersion + "| \(sysName):\(version)" + " | Apple:" + "\(UtilTools.getDeviceModel())" + " | sc:\(SCREEN_WIDTH),\(SCREEN_HEIGHT)" + " | did:\(deviceid)" + " | av:\(BaseRequest.glApiVersion)" + " | uid:\(UtilCookie.getCookieByKey("web_qtstr"))")
     return value
 }
+
+func perpareUA() -> Dictionary<String, String> {
+    let value   = getUAStr()
+    let dic     = ["User-Agent" : value]
+    return dic
+}
+
+
+func perpareStatisticsPara(delegate : DxwWebViewDelegate?) -> Dictionary<String, String> {
+    var dic : Dictionary<String, String>        = [:]
+    dic["domain"]                               = Behavior.domain
+    dic["uuid"]                                 = UtilTools.getAnalyseUUID()
+    dic["sid"]                                  = UtilTools.getSessionId()
+    dic["chid"]                                 = UtilTools.getChid()
+    dic["refer"]                                = (delegate as? BaseViewController)?.getFrom() ?? "-"
+    dic["url"]                                  = (delegate as? BaseViewController)?.getTo() ?? "-"
+    return dic
+}
+
+func perpareChartConfig() -> String {
+    if let d =  UserDefaults.standard.dictionary(forKey: "CHART_MEMORY_KEY"), (d + "") != "<null>" {
+        let jsonData = try? JSONSerialization.data(withJSONObject: d, options: [])
+        let jsonString = String(data: jsonData!, encoding: .utf8)
+        return jsonString + ""
+    }
+    return ""
+}
+
+func perpareCookies() -> Dictionary<String, String> {
+    var cookieStr: String = ""
+    if let cookies = HTTPCookieStorage.shared.cookies {
+        for c in cookies {
+            cookieStr += c.name + "=" + c.value + (cookies.last == c ? "" : ";")
+        }
+    }
+    cookieStr += ";HttpOnly=false"
+    return ["Cookie" : cookieStr]
+}

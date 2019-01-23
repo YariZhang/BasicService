@@ -94,8 +94,25 @@ open class DxwWebView: BaseView, WKUIDelegate, WKNavigationDelegate {
         jsBase = WebViewJavascriptBridgeBase()
         bridge = WebViewJavascriptBridge.init(forWebView: webView)
         bridge.setWebViewDelegate(self)
+        registerCommonJsFunctions()
     }
     
+    /**
+     charts注册必要的js方法
+     */
+    open func registerCommonJsFunctions() {
+        registerJsFunctionForKey("ready", callBack: nil)
+        registerJsFunctionForKey("readStatisticsPara", callBack: nil)
+        registerJsFunctionForKey("readUserAgent", callBack: nil)
+        registerJsFunctionForKey("loadChartConfig", callBack: nil)
+    }
+    
+    /**
+     注册需要的js方法
+     - parameter key: 调用的js方法名
+     - parameter callBack: 回调
+     - returns: 无
+     */
     public func registerJsFunctionForKey(_ key: String, callBack: ((Any?) -> Void)?) {
         bridge?.registerHandler(key, handler: { (data, nil) in
             callBack?(data)

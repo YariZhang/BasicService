@@ -133,10 +133,17 @@ class H5Helpler {
                     return
                 }
                 if !jsBase.isWebViewJavascriptBridgeURL(url) {
-                    webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-                    webView.isMultipleTouchEnabled = true
-                    webView.isUserInteractionEnabled = true
-                    decisionHandler(WKNavigationActionPolicy.allow)
+                    if url.absoluteString.contains("quchaogu.com") && url.absoluteString.lowercased().contains("newpage") {
+                        var u = url.absoluteString.replacingOccurrences(of: "newpage", with: "dxwrep")
+                        u = u.replacingOccurrences(of: "newPage", with: "dxwrep")
+                        jumpPageNative(param: ["url": u])
+                        decisionHandler(WKNavigationActionPolicy.cancel)
+                    }else{
+                        webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+                        webView.isMultipleTouchEnabled = true
+                        webView.isUserInteractionEnabled = true
+                        decisionHandler(WKNavigationActionPolicy.allow)
+                    }
                 }
             }
         }

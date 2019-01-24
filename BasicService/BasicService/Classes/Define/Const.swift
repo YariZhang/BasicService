@@ -36,6 +36,8 @@ public let SCREEN_WIDTH = UIScreen.main.bounds.width
 //当前屏幕高
 public let SCREEN_HEIGHT = UIScreen.main.bounds.height
 
+public let DXWWEBVIEW_CONFIG_UPDATE_NOTIFICATION = Notification.Name.init("DXWWEBVIEW_CONFIG_UPDATE_NOTIFICATION")
+
 public func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
     switch (lhs, rhs) {
     case let (l?, r?):

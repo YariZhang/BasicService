@@ -73,6 +73,7 @@ public class APNsCenter: NSObject, DxwPushAlertViewDelegate {
     
     public func dxwPushAlertViewAllMsg() {
         Behavior.behaviorRefer = "push_fg"
+        readPushBlock?(("/sy/xxzx", nil))
     }
     
     public func dxwPushAlertViewDetail(type: String, url: String, param: DxwDic?) {

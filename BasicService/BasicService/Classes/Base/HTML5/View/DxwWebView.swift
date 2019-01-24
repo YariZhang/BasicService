@@ -95,6 +95,7 @@ open class DxwWebView: BaseView, WKUIDelegate, WKNavigationDelegate {
         bridge = WebViewJavascriptBridge.init(forWebView: webView)
         bridge.setWebViewDelegate(self)
         registerCommonJsFunctions()
+        NotificationCenter.default.addObserver(self, selector: #selector(updateConfig), name: DXWWEBVIEW_CONFIG_UPDATE_NOTIFICATION, object: nil)
     }
     
     /**
@@ -188,6 +189,10 @@ open class DxwWebView: BaseView, WKUIDelegate, WKNavigationDelegate {
     
     public func loadLocalHtml(html: String, baseUrl: URL?) {
         webView.loadHTMLString(html, baseURL: baseUrl)
+    }
+    
+    @objc private func updateConfig() {
+        self.bridge.callHandler("chartConfigUpdate")
     }
     
     private var hasLoaded: Bool = false

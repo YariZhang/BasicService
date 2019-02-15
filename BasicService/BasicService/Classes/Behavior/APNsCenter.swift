@@ -26,10 +26,9 @@ public class APNsCenter: NSObject, DxwPushAlertViewDelegate {
     public var readPushBlock: (((url: String, param: Dictionary<String, Any>?)) -> Void)?
     
     public class func inputPushInfo(_ userInfo : [AnyHashable: Any] , isActivity : Bool = false) {
-        let info = userInfo as! Dictionary<String , AnyObject>
-        let action  = info["action"] as! Dictionary<String , AnyObject>
+        let info = userInfo as! Dictionary<String , Any>
+        let action = info["action"] as? Dictionary<String , Any> ?? DxwDic()
         let url = action["url"] + ""
-        //let id      = action["id"] + ""
         if isActivity {
             if let aps = info["aps"] as? Dictionary<String , Any> {
                 UtilTools.getAppDelegate()?.window??.endEditing(true)
@@ -68,7 +67,25 @@ public class APNsCenter: NSObject, DxwPushAlertViewDelegate {
             return
         }
         let info = userInfo as! Dictionary<String , Any>
-        jumpPage(info: info, isPush: true)
+        let action = info["action"] as? Dictionary<String , Any> ?? DxwDic()
+        let url = action["url"] + ""
+        let para = action["para"] as? Dictionary<String, Any>
+        
+        let backUrl = action["back_url"] as? String
+        let backPara = action["back_para"] as? Dictionary<String, Any>
+        
+        //            let id = action["id"] + ""
+        //            if !id.isEmpty { //通知服务器推送被阅读
+        //                DispatchQueue.global().asyncAfter(deadline: .now() + 0.5, execute: {
+        //                    //EventService.pushReadBy(id: id)
+        //                })
+        //            }
+        if backUrl != nil && backUrl!.count > 0 {
+            shared.readPushBlock?((backUrl!, backPara))
+            shared.readPushBlock?((url, para))
+        }else{
+            shared.readPushBlock?((url, para))
+        }
     }
     
     public func dxwPushAlertViewAllMsg() {

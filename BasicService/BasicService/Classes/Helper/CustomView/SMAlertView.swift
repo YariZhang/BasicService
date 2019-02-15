@@ -18,13 +18,13 @@ private let ALERTVIEW_WIDTH :CGFloat = 260 * UIScreen.main.bounds.width / 375
 public class SMAlertView: UIView {
     
     public lazy var attributesTitle: [NSAttributedString.Key: Any]     = [NSAttributedString.Key.foregroundColor: HexColor(COLOR_COMMON_BLACK),
-                                                                  NSAttributedString.Key.font: UIFont.boldFontOfSize(18)]
+                                                                          NSAttributedString.Key.font: UIFont.boldFontOfSize(18)]
     public lazy var attributesMessage: [NSAttributedString.Key: Any]   = [NSAttributedString.Key.foregroundColor: HexColor(COLOR_COMMON_BLACK_3),
-                                                                  NSAttributedString.Key.font: UIFont.normalFontOfSize(14)]
+                                                                          NSAttributedString.Key.font: UIFont.normalFontOfSize(14)]
     public lazy var attributesTips: [NSAttributedString.Key: Any]      = [NSAttributedString.Key.foregroundColor: HexColor(COLOR_COMMON_BLACK_9),
-                                                                  NSAttributedString.Key.font: UIFont.normalFontOfSize(12)]
+                                                                          NSAttributedString.Key.font: UIFont.normalFontOfSize(12)]
     public lazy var attributesButton: [NSAttributedString.Key: Any]    = [NSAttributedString.Key.foregroundColor: HexColor(COLOR_COMMON_BLACK_3),
-                                                                  NSAttributedString.Key.font: UIFont.boldFontOfSize(16)]
+                                                                          NSAttributedString.Key.font: UIFont.boldFontOfSize(16)]
     
     public var canDismissOutside: Bool = false
     public var messageAlignment: NSTextAlignment = .center
@@ -42,7 +42,7 @@ public class SMAlertView: UIView {
     public var duration: TimeInterval = 0
     public var tips: String?
     public var timeoutBlock: (() -> Void)?
-
+    
     public var cancelButtonIndex: Int {return 0}
     public var closeButtonIndex: Int {return 999}
     public var needClose: Bool = false
@@ -56,15 +56,15 @@ public class SMAlertView: UIView {
     }
     
     convenience public init(image: UIImage? = nil,
-         title: String?,
-         message: Any?,
-         delegate: SMAlertViewDelegate?,
-         cancelButtonTitle: String?) {
+                            title: String?,
+                            message: Any?,
+                            delegate: SMAlertViewDelegate?,
+                            cancelButtonTitle: String?) {
         
         self.init(frame: CGRect(x: 0,
-                                 y: 0,
-                                 width: UIScreen.main.bounds.width,
-                                 height: UIScreen.main.bounds.height))
+                                y: 0,
+                                width: UIScreen.main.bounds.width,
+                                height: UIScreen.main.bounds.height))
         
         self.image      = image
         self.title      = title
@@ -79,12 +79,12 @@ public class SMAlertView: UIView {
     }
     
     convenience public init(image: UIImage? = nil,
-         title: String?,
-         message: Any?,
-         delegate: SMAlertViewDelegate?,
-         cancelButtonTitle: String?,
-         otherButtonTitles: String,
-         _ moreButtonTitles: String...) {
+                            title: String?,
+                            message: Any?,
+                            delegate: SMAlertViewDelegate?,
+                            cancelButtonTitle: String?,
+                            otherButtonTitles: String,
+                            _ moreButtonTitles: String...) {
         
         self.init(image: image,
                   title: title,
@@ -107,6 +107,14 @@ public class SMAlertView: UIView {
         _ = buttonsAttributes?.updateValue(attributes, forKey: index)
     }
     
+    public func setAttributesToMessage(_ attributes: [NSAttributedString.Key: Any], subString: String) {
+        if let attributeStr = self.msgLabel?.attributedText {
+            let attr = NSMutableAttributedString(attributedString: attributeStr)
+            attr.addAttributes(attributes, range: NSString(string: attributeStr.string).range(of: subString))
+            msgLabel?.attributedText = attr
+        }
+    }
+    
     public func show(inView view: UIView? = UtilTools.getAppDelegate()?.window ?? nil) {
         guard view != nil else {
             return
@@ -118,7 +126,7 @@ public class SMAlertView: UIView {
             self.alpha = 1
         }, completion: {(bool) in
             if self.delayDuration > 0.0001 {
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + self.delayDuration , execute: { 
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + self.delayDuration , execute: {
                     self.dismiss()
                 })
             }
@@ -198,6 +206,7 @@ public class SMAlertView: UIView {
             if size.height > 24 {
                 msgLabel.textAlignment      = .left
             }
+            self.msgLabel                   = msgLabel
         }
         
         if tips != nil {
@@ -329,6 +338,7 @@ public class SMAlertView: UIView {
     private var buttonsAttributes: [Int: [NSAttributedString.Key: Any]]?
     
     private var contentView: UIView!
+    private weak var msgLabel: UILabel?
     private var timer: Timer?
     
     private var imageWidth: CGFloat {

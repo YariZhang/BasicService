@@ -65,9 +65,9 @@ public func +(left : Any?, right : String) -> String {
 
 //log打印
 public func logPrint<T>(_ message: T,
-                 file: String = #file,
-                 method: String = #function,
-                 line: Int = #line) {
+                        file: String = #file,
+                        method: String = #function,
+                        line: Int = #line) {
     #if !RELEASE
     print("\((file as NSString).lastPathComponent)[\(line)], \(method): \(message)")
     #endif
@@ -89,7 +89,7 @@ public func jumpPageNative(param: DxwDic, callBack: (() -> Void)? = nil) -> Bool
                 UIApplication.shared.openURL(uri)
                 return true
             }else{
-                UtilTools.getAppDelegate()?.window??.makeToast("页面不存在")
+                logPrint("页面不存在")
                 return false
             }
         }else{
@@ -102,7 +102,7 @@ public func jumpPageNative(param: DxwDic, callBack: (() -> Void)? = nil) -> Bool
 }
 
 public func jumpPage(info : Dictionary<String , Any>, isPush : Bool = false) {
-    let action = info["action"] as! Dictionary<String , Any>
+    let action = info["action"] as? Dictionary<String , Any> ?? DxwDic()
     let url = action["url"] + ""
     let para = action["para"] as? Dictionary<String, Any>
     
@@ -110,7 +110,7 @@ public func jumpPage(info : Dictionary<String , Any>, isPush : Bool = false) {
     let backPara = action["back_para"] as? Dictionary<String, Any>
     
     if isPush {
-        let id      = action["id"] + ""
+        let id = action["id"] + ""
         if !id.isEmpty { //通知服务器推送被阅读
             DispatchQueue.global().asyncAfter(deadline: .now() + 0.5, execute: {
                 //EventService.pushReadBy(id: id)

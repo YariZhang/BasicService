@@ -251,7 +251,7 @@ open class BaseViewController: UIViewController, UIGestureRecognizerDelegate, Vi
         return "/"
     }
     
-    @objc public func popAction() {
+    @objc open func popAction() {
         if let _ = self.presentingViewController {
             self.dismiss(animated: true, completion: nil)
         }else{

@@ -114,7 +114,7 @@ open class BaseWebViewController: BaseViewController, DxwWebViewDelegate {
         webView.webView.stopLoading()
     }
     
-    override public func popAction() {
+    override open func popAction() {
         if needPopStack && webView.webView.canGoBack {
             webView.webView.goBack()
         }else{

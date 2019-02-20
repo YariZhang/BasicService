@@ -61,7 +61,7 @@ public class SelectedSegmentedBar: UIView {
     private var line: UIView?
     public var selectedColor: UIColor = HexColor(COLOR_COMMON_BASE_NAVI)
     public var normalColor: UIColor = HexColor(COLOR_COMMON_BLACK_3)
-
+    
     public func setIndex(index: Int, needCall : Bool, needAni: Bool = true) {
         if index != self.index {
             _index = index
@@ -87,7 +87,7 @@ public class SelectedSegmentedBar: UIView {
     }
     
     /*1.2.0 增加item图片在右边显示 */
-    public init(frame: CGRect , items : [Any] ,itemImages : [String] = [] ,delegate : SelectedSegmentedBarDelegate?, isMain: Bool = false, isMultiStyle: Bool = false, fontNum : CGFloat = 16, needBold : Bool = false, normalColor : UIColor = HexColor(COLOR_COMMON_BLACK_3), selectedColor : UIColor = HexColor(COLOR_COMMON_BASE_NAVI), needSplit: Bool = false, needSelLine: Bool = true) {
+    public init(frame: CGRect , items : [Any] ,itemImages : [String] = [] ,delegate : SelectedSegmentedBarDelegate?, needFixText: Bool = false, isMain: Bool = false, isMultiStyle: Bool = false, fontNum : CGFloat = 16, needBold : Bool = false, normalColor : UIColor = HexColor(COLOR_COMMON_BLACK_3), selectedColor : UIColor = HexColor(COLOR_COMMON_BASE_NAVI), needSplit: Bool = false, needSelLine: Bool = true) {
         super.init(frame: frame)
         self.delegate = delegate
         self.backgroundColor = HexColor(COLOR_COMMON_TAB)
@@ -150,13 +150,17 @@ public class SelectedSegmentedBar: UIView {
             
         }else{
             var wArray = [CGFloat]()
-            let btnW = frame.size.width / CGFloat(items.count)
-            for _ in items {
-                wArray.append(btnW)
+            if let its = items as? [String], needFixText {
+                wArray = getWidthArray(items: its, baseWidth: frame.size.width)
+            }else{
+                let btnW = frame.size.width / CGFloat(items.count)
+                for _ in items {
+                    wArray.append(btnW)
+                }
             }
             
             for i in 0 ..< items.count {
-                let btn = BaseButton(frame: CGRect(x: CGFloat(i) * btnW, y: 0, width: wArray[i], height: btnH))
+                let btn = BaseButton(frame: CGRect(x: getXValue(index: i, values: wArray), y: 0, width: wArray[i], height: btnH))
                 btn.tag = i + 100
                 btn.setTitle(items[i] as? String, for: UIControl.State())
                 btn.titleLabel?.font = font
@@ -278,9 +282,47 @@ public class SelectedSegmentedBar: UIView {
             }
         }
     }
-
+    
+    //MARK: segment bar 获取数组宽度
+    private func getWidthArray(items : [String], baseWidth : CGFloat = SCREEN_WIDTH) -> [CGFloat]
+    {
+        var totalLength     : CGFloat               = 0
+        var fontWidthArray  : Array<CGFloat>        = [CGFloat]()
+        for item in items
+        {
+            let width       = item.sizeWith(attributes: [.font : UIFont.normalFontOfSize(16)]).width
+            fontWidthArray.append(width)
+            totalLength     += width
+        }
+        
+        var lengthArray     = [CGFloat]()
+        for value in fontWidthArray
+        {
+            lengthArray.append((value / totalLength) * baseWidth)
+        }
+        
+        return lengthArray
+    }
+    
+    private func getXValue(index : Int, values : [CGFloat]) -> CGFloat
+    {
+        if index > values.count
+        {
+            return 0
+        }
+        
+        var value : CGFloat     = 0
+        
+        for i in 0 ..< index
+        {
+            value += values[i]
+        }
+        
+        return value
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
 }

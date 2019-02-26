@@ -240,7 +240,9 @@ open class BaseRequest: NSObject {
         let requestSuccess =
         {
             (operation : URLSessionTask, responseObject : Any?) -> Void in
-            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            DispatchQueue.main.async {
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            }
             var baseData : BaseModel?
             switch self.outputType {
             case .json:
@@ -274,7 +276,9 @@ open class BaseRequest: NSObject {
         let requestFailure =
         {
             (operation :URLSessionDataTask?, erro :Error) -> Void in
-            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            DispatchQueue.main.async {
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            }
             if self.failureBlock != nil
             {
                 var resError : BaseError?

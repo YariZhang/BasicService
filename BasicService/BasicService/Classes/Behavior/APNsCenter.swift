@@ -38,10 +38,12 @@ public class APNsCenter: NSObject, DxwPushAlertViewDelegate {
                 td.content = aps["alert"] + ""
                 td.para = action["para"] as? Dictionary<String, Any>
                 td.id = action["id"] + ""
-                let pushAlert = DxwPushAlertView()
-                pushAlert.delegate = shared
-                pushAlert.data = td
-                pushAlert.show()
+                if !DxwPushAlertView.existMsg(id: td.id) {
+                    let pushAlert = DxwPushAlertView()
+                    pushAlert.delegate = shared
+                    pushAlert.data = td
+                    pushAlert.show()
+                }
             }
             shared.uInfo = userInfo
             

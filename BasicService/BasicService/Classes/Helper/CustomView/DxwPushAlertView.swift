@@ -16,6 +16,7 @@ import TYAttributedLabel
     @objc optional func dxwPushAlertViewMsgCountLeft(num: Int)
 }
 
+private let PUSH_MSG_IDS = "PUSH_MSG_IDS"
 public class DxwPushAlertView: BaseView, TYAttributedLabelDelegate {
     
     public weak var delegate: DxwPushAlertViewDelegate?
@@ -23,7 +24,25 @@ public class DxwPushAlertView: BaseView, TYAttributedLabelDelegate {
     public var data: PushMsgData = PushMsgData() {
         didSet {
             showData()
+            if !data.id.isEmpty {
+                var ids: Array<String> = []
+                if let msgIds = UtilTools.getUserDefaults(PUSH_MSG_IDS) as? Array<String> {
+                    ids = msgIds
+                }
+                ids.append(data.id)
+                UtilTools.setUserDefaults(ids, key: PUSH_MSG_IDS)
+            }
         }
+    }
+    
+    public class func existMsg(id: String) -> Bool {
+        guard !id.isEmpty else {
+            return true
+        }
+        if let msgIds = UtilTools.getUserDefaults(PUSH_MSG_IDS) as? Array<String>, msgIds.contains(id) {
+            return true
+        }
+        return false
     }
     
     public func show() {

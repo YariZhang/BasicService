@@ -11,12 +11,14 @@ import UserNotifications
 import QCGURLRouter
 
 public struct PushMsgData {
-    var type: String = ""
-    var url: String = ""
-    var content: String = ""
-    var para: Dictionary<String, Any>?
-    var lastMsgTime: String = ""
-    var id: String = ""
+    public init() {
+    }
+    public var type: String = ""
+    public var url: String = ""
+    public var content: String = ""
+    public var para: Dictionary<String, Any>?
+    public var lastMsgTime: String = ""
+    public var id: String = ""
 }
 
 public class APNsCenter: NSObject, DxwPushAlertViewDelegate {

@@ -11,14 +11,14 @@
 import UIKit
 import SDWebImage
 
-protocol ButtonForTabDelegate : NSObjectProtocol
+public protocol ButtonForTabDelegate : NSObjectProtocol
 {
     func buttonForTabClicked(_ sender : BaseButton)
 }
 
-class ButtonForTab: BaseButton
+public class ButtonForTab: BaseButton
 {
-    weak var delegate   : ButtonForTabDelegate?
+    public weak var delegate   : ButtonForTabDelegate?
     {
         didSet
         {
@@ -26,7 +26,7 @@ class ButtonForTab: BaseButton
         }
     }
     
-    var titleFont : CGFloat   = 10
+    public var titleFont : CGFloat   = 10
     {
         didSet
         {
@@ -37,7 +37,7 @@ class ButtonForTab: BaseButton
         }
     }
     
-    var marginHeight : CGFloat  = 4
+    public var marginHeight : CGFloat  = 4
     {
         didSet
         {
@@ -48,7 +48,7 @@ class ButtonForTab: BaseButton
         }
     }
     
-    var marginTop : CGFloat     = 10
+    public var marginTop : CGFloat     = 10
     {
         didSet
         {
@@ -59,7 +59,7 @@ class ButtonForTab: BaseButton
         }
     }
 
-    init(frame: CGRect ,image : String , title : String ,toView : UIView, isRevearse : Bool = false)
+    public init(frame: CGRect ,image : String , title : String ,toView : UIView, isRevearse : Bool = false)
     {
         super.init(frame: frame)
         self.isImageFromNet     = false
@@ -75,7 +75,7 @@ class ButtonForTab: BaseButton
         toView.addSubview(self)
     }
     
-    init(frame: CGRect ,imageUrlStr : String , title : String ,toView : UIView, isRevearse : Bool = false)
+    public init(frame: CGRect ,imageUrlStr : String , title : String ,toView : UIView, isRevearse : Bool = false)
     {
         super.init(frame: frame)
         self.isImageFromNet     = true
@@ -91,12 +91,12 @@ class ButtonForTab: BaseButton
         toView.addSubview(self)
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
     
-    override func layoutSubviews()
+    override public func layoutSubviews()
     {
         super.layoutSubviews()
         self.titleLabel?.font   = UIFont.normalFontOfSize(titleFont)

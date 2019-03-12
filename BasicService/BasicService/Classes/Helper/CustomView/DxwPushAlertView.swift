@@ -16,7 +16,7 @@ import TYAttributedLabel
     @objc optional func dxwPushAlertViewMsgCountLeft(num: Int)
 }
 
-private let PUSH_MSG_IDS = "PUSH_MSG_IDS"
+let PUSH_MSG_IDS = "PUSH_MSG_IDS"
 public class DxwPushAlertView: BaseView, TYAttributedLabelDelegate {
     
     public weak var delegate: DxwPushAlertViewDelegate?

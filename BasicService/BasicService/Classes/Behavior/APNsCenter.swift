@@ -62,6 +62,15 @@ public class APNsCenter: NSObject, DxwPushAlertViewDelegate {
                     Behavior.eventReport("push_read_bg", isPage: false,to : url)
                 }
             }
+            let id = action["id"] + ""
+            if !id.isEmpty {
+                var ids: Array<String> = []
+                if let msgIds = UtilTools.getUserDefaults(PUSH_MSG_IDS) as? Array<String> {
+                    ids = msgIds
+                }
+                ids.append(id)
+                UtilTools.setUserDefaults(ids, key: PUSH_MSG_IDS)
+            }
             dealPushNotification(userInfo)
         }
     }
